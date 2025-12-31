@@ -19,7 +19,6 @@
             align-items: center;
             min-height: 100vh;
         }
-
         /* Fixed Header Styles */
         header {
             position: fixed;
@@ -63,7 +62,6 @@
             transition: color 0.3s;
         }
         .desktop-nav a:hover { color: #3498db; }
-
         /* Hamburger & Floating Menu */
         .hamburger { cursor: pointer; padding: 5px; display: block; }
         .hamburger span {
@@ -73,7 +71,6 @@
         .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
         .hamburger.active span:nth-child(2) { opacity: 0; }
         .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
-
         .nav-menu {
             position: absolute; z-index: 1100; top: 60px; right: 0;
             background: rgba(4, 5, 5, 0.98); border-radius: 15px; padding: 20px;
@@ -86,7 +83,6 @@
             border-radius: 10px; transition: background 0.3s;
         }
         .nav-menu a:hover { background: rgba(52, 152, 219, 0.4); }
-
         /* Container */
         .container {
             max-width: 900px;
@@ -108,7 +104,7 @@
         p, li { font-size: 1.1rem; line-height: 1.7; opacity: 0.9; }
         ul { padding-left: 20px; }
         strong { color: #3498db; }
-        
+       
         .back-link-wrapper { text-align: center; margin-top: 40px; }
         .back-btn {
             display: inline-block; padding: 14px 40px; background: #2980b9;
@@ -116,7 +112,6 @@
             font-weight: bold; transition: 0.3s;
         }
         .back-btn:hover { background: #3498db; transform: translateY(-2px); }
-
         /* Footer */
         footer {
             width: 100%;
@@ -146,7 +141,6 @@
             opacity: 0.7;
             text-align: center;
         }
-
         /* Mobile Fixes */
         @media (max-width: 768px) {
             .desktop-nav { display: none; }
@@ -208,13 +202,19 @@
     <div id="footer"></div>
 
     <script>
-        // Load header and footer from root
-        fetch('header.html')
-            .then(response => response.text())
+        // Load header and footer from the parent directory (since this page is in /terms-and-conditions/)
+        fetch('../header.html')
+            .then(response => {
+                if (!response.ok) console.error('Header load failed:', response.status);
+                return response.text();
+            })
             .then(data => document.getElementById('header').innerHTML = data);
 
-        fetch('footer.html')
-            .then(response => response.text())
+        fetch('../footer.html')
+            .then(response => {
+                if (!response.ok) console.error('Footer load failed:', response.status);
+                return response.text();
+            })
             .then(data => document.getElementById('footer').innerHTML = data);
 
         function toggleMenu() {
