@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>FindMTL.ca - Links</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reusing your exact site styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            color: #ffffff;
+            background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('https://media.istockphoto.com/id/478489838/photo/panoramic-picture-of-montreal-cityscape-at-sunset.jpg?s=612x612&w=0&k=20&c=78iWttuKv4r2Qz7U4QhLKnYg3Uy4zUumzNkHTq14DWo=') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1100px;
+            width: 90%;
+            padding: 160px 20px 80px;
+            flex-grow: 1;
+            box-sizing: border-box;
+        }
+
+        h1 { font-size: 2.5rem; margin-bottom: 40px; font-weight: 300; text-align: center; }
+
+        /* Grid Layout for the 10 Boxes */
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+
+        .link-box {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 40px 20px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.4s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .link-box:hover {
+            background-color: #2980b9; /* Matching your button color */
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            border-color: #3498db;
+        }
+
+        /* Responsive Mobile Tweak */
+        @media (max-width: 768px) {
+            .container { padding-top: 120px; }
+            h1 { font-size: 2rem; }
+            .links-grid { grid-template-columns: 1fr 1fr; } /* 2 columns on mobile */
+        }
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+
+    <div class="container">
+        <h1>Explore FindMTL</h1>
+        
+        <div class="links-grid">
+            <a href="https://s.findmtl.ca/link1" class="link-box">Box 1</a>
+            <a href="https://s.findmtl.ca/link2" class="link-box">Box 2</a>
+            <a href="https://s.findmtl.ca/link3" class="link-box">Box 3</a>
+            <a href="https://s.findmtl.ca/link4" class="link-box">Box 4</a>
+            <a href="https://s.findmtl.ca/link5" class="link-box">Box 5</a>
+            <a href="https://s.findmtl.ca/link6" class="link-box">Box 6</a>
+            <a href="https://s.findmtl.ca/link7" class="link-box">Box 7</a>
+            <a href="https://s.findmtl.ca/link8" class="link-box">Box 8</a>
+            <a href="https://s.findmtl.ca/link9" class="link-box">Box 9</a>
+            <a href="https://s.findmtl.ca/link10" class="link-box">Box 10</a>
+        </div>
+    </div>
+    
+    <div id="footer"></div>
+
+    <script>
+        // Load your existing header and footer
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('header').innerHTML = data);
+
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('footer').innerHTML = data);
+    </script>
+</body>
+</html>
