@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Eruv Status & Map • FindMTL.ca</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            color: #ffffff;
+            background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('https://media.istockphoto.com/id/478489838/photo/panoramic-picture-of-montreal-cityscape-at-sunset.jpg?s=612x612&w=0&k=20&c=78iWttuKv4r2Qz7U4QhLKnYg3Uy4zUumzNkHTq14DWo=') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            min-height: 100vh;
+        }
+        /* Fixed Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            z-index: 1000;
+        }
+        .header-content {
+            max-width: 90%;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+        }
+        .desktop-nav {
+            display: flex;
+            gap: 25px;
+        }
+        .desktop-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .desktop-nav a:hover { color: #3498db; }
+
+        /* Hamburger & Floating Menu */
+        .hamburger {
+            cursor: pointer;
+            padding: 5px;
+            display: block;
+        }
+        .hamburger span {
+            display: block;
+            width: 30px;
+            height: 3px;
+            background: white;
+            margin: 6px 0;
+            transition: 0.4s;
+            border-radius: 2px;
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+        .nav-menu {
+            position: absolute;
+            z-index: 1100;
+            top: 60px;
+            right: 0;
+            background: rgba(4, 5, 5, 0.98);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 240px;
+            text-align: right;
+        }
+        .nav-menu.active { display: flex; }
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 10px 16px;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+        .nav-menu a:hover { background: rgba(52, 152, 219, 0.4); }
+
+        /* Container & Spacing */
+        .container {
+            max-width: 90%;
+            width: 100%;
+            padding: 160px 20px 60px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        h1 { font-size: 3.5rem; margin-bottom: 20px; letter-spacing: 1px; font-weight: 300; }
+        .subtitle { font-size: 1.6rem; margin-bottom: 30px; font-style: italic; opacity: 0.9; }
+        p { font-size: 1.2rem; line-height: 1.6; margin-bottom: 30px; opacity: 0.9; max-width: 800px; margin-left: auto; margin-right: auto; }
+
+        /* Button Styling */
+        .eruv-btn {
+            display: inline-block;
+            padding: 16px 40px;
+            background-color: #2980b9;
+            color: white;
+            text-decoration: none;
+            border-radius: 60px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: 0.4s;
+            margin: 10px 0 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .eruv-btn:hover {
+            background-color: #3498db;
+            transform: translateY(-3px);
+        }
+
+        /* Map Embed */
+        .map-container {
+            width: 100%;
+            max-width: 1000px;
+            height: 600px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            margin: 0 auto 40px;
+        }
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* Footer */
+        footer { 
+            width: 100%; 
+            padding: 40px 20px; 
+            background: rgba(0, 0, 0, 0.5); 
+            backdrop-filter: blur(10px); 
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .footer-links a { 
+            color: rgba(255, 255, 255, 0.8); 
+            text-decoration: none; 
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover { color: white; }
+        .copyright {
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
+        /* MOBILE FIXES */
+        @media (max-width: 768px) {
+            .desktop-nav { display: none; }
+            header { padding: 12px 0; }
+            .container { 
+                padding-top: 180px;
+                justify-content: flex-start;
+            }
+            h1 { font-size: 2.2rem; margin-bottom: 15px; }
+            .subtitle { font-size: 1.2rem; margin-bottom: 20px; }
+            p { font-size: 1.1rem; }
+            .map-container {
+                height: 400px;
+                margin: 20px auto;
+            }
+            .nav-menu { top: 55px; width: 240px; }
+        }
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+
+    <div class="container">
+        <h1>Montreal Eruv Status</h1>
+        <div class="subtitle">Official Eruv & Weekly Updates</div>
+        <p>
+            Stay informed on the status of our community's Eruv. Below you will find a detailed map of the current Eruv boundaries across Montreal. For immediate status updates and final weekly confirmation, please use the link below to visit the official Eruv portal.
+        </p>
+        
+        <div>
+            <a href="https://eruvstat.us/montreal" target="_blank" class="eruv-btn">
+                <i class="fas fa-check-circle" style="margin-right: 10px;"></i> Check Official Weekly Status
+            </a>
+        </div>
+
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/d/embed?mid=1tQCtowYHtfkteFXNj-Ljb9JR-WeloTE" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        
+        <p>Notice an issue or have a question? <a href="../contact-us.html" style="color:#3498db; text-decoration:underline;">Let us know!</a></p>
+    </div>
+
+    <div id="footer"></div>
+
+    <script>
+        // Load header and footer from root (since this page is in /eruv/ or similar subfolder)
+        fetch('../header.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('header').innerHTML = data);
+
+        fetch('../footer.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('footer').innerHTML = data);
+
+        function toggleMenu() {
+            const hamburger = document.querySelector('.hamburger');
+            const menu = document.getElementById('navMenu');
+            if (hamburger && menu) {
+                hamburger.classList.toggle('active');
+                menu.classList.toggle('active');
+            }
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.closest('.nav-wrapper')) {
+                const hamburger = document.querySelector('.hamburger');
+                const menu = document.getElementById('navMenu');
+                if (hamburger && hamburger.classList.contains('active')) {
+                    hamburger.classList.remove('active');
+                    menu.classList.remove('active');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
