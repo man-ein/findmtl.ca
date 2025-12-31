@@ -1,3 +1,127 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>FindMTL.ca - Coming Soon</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+
+        body, html {
+
+            margin: 0;
+
+            padding: 0;
+
+            height: 100%;
+
+            font-family: 'Helvetica', 'Arial', sans-serif;
+
+            color: #ffffff;
+
+            background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('https://media.istockphoto.com/id/478489838/photo/panoramic-picture-of-montreal-cityscape-at-sunset.jpg?s=612x612&w=0&k=20&c=78iWttuKv4r2Qz7U4QhLKnYg3Uy4zUumzNkHTq14DWo=') no-repeat center center fixed;
+
+            background-size: cover;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+
+            text-align: center;
+
+            min-height: 100vh;
+
+        }
+
+        /* Fixed Header */
+
+        header {
+
+            position: fixed;
+
+            top: 0;
+
+            left: 0;
+
+            width: 100%;
+
+            background: rgba(0, 0, 0, 0.6);
+
+            backdrop-filter: blur(10px);
+
+            padding: 15px 0;
+
+            z-index: 1000;
+
+        }
+
+        .header-content {
+
+            max-width: 90%;
+
+            width: 100%;
+
+            margin: 0 auto;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+        }
+
+        .logo {
+
+            font-size: 1.8rem;
+
+            font-weight: bold;
+
+            color: white;
+
+            text-decoration: none;
+
+        }
+
+        .nav-wrapper {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 20px;
+
+            position: relative;
+
+        }
+
+        .desktop-nav {
+
+            display: flex;
+
+To fix the Mailchimp embed code for your FindMTL.ca landing page, I have cleaned up several syntax errors (like the false; in your CSS), removed the excessive SMS logic that isn't needed for your simple Email/Name form, and styled it to match your "Coming Soon" aesthetic.
+
+Key Fixes Made:
+CSS Cleanup: Removed the broken false; property in the #mc_embed_signup block.
+
+Form Responsiveness: Changed the fixed width: 600px to max-width: 500px and width: 90% so it looks good on mobile.
+
+Visual Styling: Made the form background transparent with a slight blur to match your background image.
+
+Simplified Script: Kept only the essential validation script so the page loads faster.
+
+Replace your current Mailchimp block with this version:
+
+HTML
 <div id="mc_embed_shell" style="margin-top: 100px; width: 100%; display: flex; justify-content: center;">
     <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
     
