@@ -20,6 +20,96 @@
             text-align: center;
             min-height: 100vh;
         }
+        /* Fixed Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            z-index: 1000;
+        }
+        .header-content {
+            max-width: 90%;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+        }
+        .desktop-nav {
+            display: flex;
+            gap: 25px;
+        }
+        .desktop-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .desktop-nav a:hover { color: #3498db; }
+
+        /* Hamburger & Floating Menu */
+        .hamburger {
+            cursor: pointer;
+            padding: 5px;
+            display: block;
+        }
+        .hamburger span {
+            display: block;
+            width: 30px;
+            height: 3px;
+            background: white;
+            margin: 6px 0;
+            transition: 0.4s;
+            border-radius: 2px;
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+        .nav-menu {
+            position: absolute;
+            z-index: 1100;
+            top: 60px;
+            right: 0;
+            background: rgba(4, 5, 5, 0.98);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 240px;
+            text-align: right;
+        }
+        .nav-menu.active { display: flex; }
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 10px 16px;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+        .nav-menu a:hover { background: rgba(52, 152, 219, 0.4); }
+
         /* Container & Spacing */
         .container {
             max-width: 90%;
@@ -89,8 +179,40 @@
             transition: background 0.4s;
         }
 
+        /* Footer Spacing Fixed */
+        footer { 
+            width: 100%; 
+            padding: 40px 20px; 
+            background: rgba(0, 0, 0, 0.5); 
+            backdrop-filter: blur(10px); 
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .footer-links a { 
+            color: rgba(255, 255, 255, 0.8); 
+            text-decoration: none; 
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover { color: white; }
+        .copyright {
+            font-size: 0.85rem;
+            opacity: 0.7;
+        }
+
         /* MOBILE FIXES */
         @media (max-width: 768px) {
+            .desktop-nav { display: none; }
+            header { padding: 12px 0; }
             .container { 
                 padding-top: 180px;
                 justify-content: flex-start;
@@ -104,6 +226,7 @@
                 margin-bottom: 12px; 
                 box-sizing: border-box;
             }
+            .nav-menu { top: 55px; width: 240px; }
         }
     </style>
 </head>
@@ -115,7 +238,7 @@
         <div class="subtitle">Your hub for Montréal's Jewish community</div>
         <p>We're thrilled to be building a warm and welcoming resource just for you!<br>
         Soon you'll be able to easily find synagogues, kosher restaurants, schools, events, organizations, and ways to connect with our vibrant community across Montréal.</p>
-        <h1>Got a suggestion?</h1>
+<h1>Got a suggestion?</h1>
 <div class="subtitle">Let us know!</div>
 <p>We exist to hear your ideas! Please click ‘Contact Us’ and submit your idea.</p>
 
@@ -127,6 +250,7 @@
 <div style="margin-top: 60px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.15);">
     <div class="subtitle">To get alerted when we go live, please enter your name and email address below.</div>
 </div>
+        
         <div class="subscribe-form">
             <form action="https://mendye.us5.list-manage.com/subscribe/post?u=f20d6385f7bb834896f8fa2d6&amp;id=edf834306d&amp;f_id=00728ae9f0" method="post" target="_blank" novalidate>
                 <div class="form-group">
@@ -141,6 +265,7 @@
     <div id="footer"></div>
 
     <script>
+        // Load header and footer
         fetch('header.html')
             .then(response => response.text())
             .then(data => document.getElementById('header').innerHTML = data);
@@ -149,10 +274,17 @@
             .then(response => response.text())
             .then(data => document.getElementById('footer').innerHTML = data);
 
+        // Menu toggle script (will work after header loads)
         function toggleMenu() {
-            document.querySelector('.hamburger').classList.toggle('active');
-            document.getElementById('navMenu').classList.toggle('active');
+            const hamburger = document.querySelector('.hamburger');
+            const menu = document.getElementById('navMenu');
+            if (hamburger && menu) {
+                hamburger.classList.toggle('active');
+                menu.classList.toggle('active');
+            }
         }
+
+        // Close menu when clicking outside
         window.onclick = function(event) {
             if (!event.target.closest('.nav-wrapper')) {
                 const hamburger = document.querySelector('.hamburger');
