@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Resources • FindMTL.ca</title>
+    <title>Coming Soon • FindMTL.ca</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body, html {
@@ -17,80 +17,194 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            text-align: center;
             min-height: 100vh;
         }
+        /* Fixed Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            z-index: 1000;
+        }
+        .header-content {
+            max-width: 90%;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+        }
+        .nav-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+        }
+        .desktop-nav {
+            display: flex;
+            gap: 25px;
+        }
+        .desktop-nav a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .desktop-nav a:hover { color: #3498db; }
+
+        /* Hamburger & Floating Menu */
+        .hamburger {
+            cursor: pointer;
+            padding: 5px;
+            display: block;
+        }
+        .hamburger span {
+            display: block;
+            width: 30px;
+            height: 3px;
+            background: white;
+            margin: 6px 0;
+            transition: 0.4s;
+            border-radius: 2px;
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+        .nav-menu {
+            position: absolute;
+            z-index: 1100;
+            top: 60px;
+            right: 0;
+            background: rgba(4, 5, 5, 0.98);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            display: none;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 240px;
+            text-align: right;
+        }
+        .nav-menu.active { display: flex; }
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 10px 16px;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+        .nav-menu a:hover { background: rgba(52, 152, 219, 0.4); }
 
         /* Container & Spacing */
         .container {
-            max-width: 1100px;
+            max-width: 90%;
             width: 100%;
             padding: 160px 20px 60px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            position: relative;
             box-sizing: border-box;
-            text-align: center;
         }
 
-        /* Text Sizes - Made Smaller per your request */
-        h1 { 
-            font-size: 2.5rem; 
-            margin-bottom: 15px; 
-            letter-spacing: 1px; 
-            font-weight: 300; 
-        }
-        .subtitle { 
-            font-size: 1.2rem; 
-            margin-bottom: 40px; 
-            opacity: 0.9; 
-            line-height: 1.6; 
-        }
+        h1 { font-size: 4rem; margin-bottom: 20px; letter-spacing: 2px; font-weight: 300; }
+        .subtitle { font-size: 1.8rem; margin-bottom: 30px; font-style: italic; opacity: 0.9; }
+        p { font-size: 1.3rem; line-height: 1.6; margin-bottom: 50px; opacity: 0.9; max-width: 90%; padding: 0 10px; }
 
-        /* Links Grid */
-        .links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
+        /* Footer Spacing Fixed */
+        footer {
             width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .link-box {
-            background: rgba(255, 255, 255, 0.15);
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(10px);
-            padding: 50px 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            font-size: 1.3rem;
-            transition: all 0.4s ease;
+            box-sizing: border-box;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            gap: 20px;
+        }
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover { color: white; }
+        .copyright {
+            font-size: 0.85rem;
+            opacity: 0.7;
         }
 
-        .link-box:hover {
-            background: #2980b9;
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-        }
-
-        .back-link { margin-top: 40px; }
-        .back-link a { color: #3498db; text-decoration: none; font-size: 1rem; }
-        .back-link a:hover { text-decoration: underline; }
-
-        /* Mobile Fixes */
+        /* Mobile-specific fixes */
         @media (max-width: 768px) {
-            .container { padding-top: 140px; }
-            h1 { font-size: 2rem; }
-            .links-grid { grid-template-columns: 1fr; gap: 15px; }
-            .link-box { padding: 40px 15px; font-size: 1.1rem; }
+            .desktop-nav { display: none; }
+            header { padding: 12px 0; }
+            .container {
+                padding-top: 180px;
+                justify-content: flex-start;
+            }
+            h1 {
+                font-size: 2.8rem;
+                letter-spacing: 1px;
+            }
+            .subtitle {
+                font-size: 1.4rem;
+            }
+            p {
+                font-size: 1.1rem;
+                max-width: 95%;
+            }
+            .hamburger {
+                top: 20px;
+                right: 15px;
+            }
+            .hamburger span {
+                width: 28px;
+                height: 3px;
+            }
+            .nav-menu {
+                top: 70px;
+                right: 15px;
+                min-width: 180px;
+                padding: 15px;
+            }
+            .nav-menu a {
+                font-size: 1rem;
+                padding: 10px 14px;
+            }
+        }
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.4rem;
+            }
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            p {
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
@@ -98,30 +212,23 @@
     <div id="header"></div>
 
     <div class="container">
-        <h1>Resources</h1>
-        <p class="subtitle">Strengthening our community, one connection at a time.</p>
-
-        <div class="links-grid">
-            <a href="/shul-info" class="link-box">Shul Information</a>
-            <a href="/minyanim" class="link-box">Minyanim</a>
-        </div>
-
-        <div class="back-link">
-            <a href="/">← Back to Home</a>
-        </div>
+        <h1>Coming Soon</h1>
+        <div class="subtitle">We're Working on Something Special</div>
+        <p>This section is under construction.<br>
+        Thank you for your patience – exciting things are on the way!</p>
     </div>
 
     <div id="footer"></div>
 
     <script>
-        // Use '/' to fetch from the root directory regardless of subfolder
+        // Paths changed to /header.html and /footer.html to target the root directory
         fetch('/header.html')
             .then(response => {
                 if (!response.ok) throw new Error('Header not found');
                 return response.text();
             })
             .then(data => document.getElementById('header').innerHTML = data)
-            .catch(err => console.error('Header fetch error:', err));
+            .catch(err => console.error(err));
 
         fetch('/footer.html')
             .then(response => {
@@ -129,9 +236,8 @@
                 return response.text();
             })
             .then(data => document.getElementById('footer').innerHTML = data)
-            .catch(err => console.error('Footer fetch error:', err));
+            .catch(err => console.error(err));
 
-        // Hamburger Menu Logic (Ensure this matches your header.html structure)
         function toggleMenu() {
             const hamburger = document.querySelector('.hamburger');
             const menu = document.getElementById('navMenu');
