@@ -1,196 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Resources • FindMTL.ca</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: 'Helvetica', 'Arial', sans-serif;
-            color: #ffffff;
-            background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('https://media.istockphoto.com/id/478489838/photo/panoramic-picture-of-montreal-cityscape-at-sunset.jpg?s=612x612&w=0&k=20&c=78iWttuKv4r2Qz7U4QhLKnYg3Uy4zUumzNkHTq14DWo=') no-repeat center center fixed;
-            background-size: cover;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        /* Fixed Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            padding: 15px 0;
-            z-index: 1000;
-        }
-        .header-content {
-            max-width: 90%;
-            width: 100%;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: white;
-            text-decoration: none;
-        }
-        .nav-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            position: relative;
-        }
-        .desktop-nav {
-            display: flex;
-            gap: 25px;
-        }
-        .desktop-nav a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        .desktop-nav a:hover { color: #3498db; }
-
-        /* Hamburger & Floating Menu */
-        .hamburger { cursor: pointer; padding: 5px; display: block; }
-        .hamburger span {
-            display: block; width: 30px; height: 3px; background: white;
-            margin: 6px 0; transition: 0.4s; border-radius: 2px;
-        }
-        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
-        .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
-
-        .nav-menu {
-            position: absolute; z-index: 1100; top: 60px; right: 0;
-            background: rgba(4, 5, 5, 0.98); border-radius: 15px; padding: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7); display: none;
-            flex-direction: column; gap: 8px; min-width: 240px; text-align: right;
-        }
-        .nav-menu.active { display: flex; }
-        .nav-menu a {
-            color: white; text-decoration: none; font-size: 1.1rem; padding: 10px 16px;
-            border-radius: 10px; transition: background 0.3s;
-        }
-        .nav-menu a:hover { background: rgba(52, 152, 219, 0.4); }
-
-        /* Container */
-        .container {
-            max-width: 1100px;
-            width: 100%;
-            padding: 160px 20px 60px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            box-sizing: border-box;
-            text-align: center;
-        }
-
-        h1 { font-size: 3.5rem; margin-bottom: 20px; letter-spacing: 1px; font-weight: 300; }
-        .subtitle { font-size: 1.3rem; margin-bottom: 40px; opacity: 0.9; line-height: 1.6; }
-
-        /* Links Grid - Using the glassmorphism from your form card */
-        .links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        .link-box {
-            background: rgba(255, 255, 255, 0.15); /* Matches contact-form-card */
-            backdrop-filter: blur(10px);
-            padding: 40px 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            color: white;
-            font-weight: bold;
-            font-size: 1.2rem;
-            transition: all 0.4s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .link-box:hover {
-            background: #2980b9;
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-        }
-
-        .back-link { margin-top: 40px; }
-        .back-link a { color: #3498db; text-decoration: none; font-size: 1.1rem; }
-        .back-link a:hover { text-decoration: underline; }
-
-        /* Footer */
-        footer {
-            width: 100%;
-            padding: 40px 20px;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-        .footer-links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            font-size: 0.95rem;
-        }
-        .footer-links a:hover { color: white; }
-        .copyright {
-            font-size: 0.85rem;
-            opacity: 0.7;
-            text-align: center;
-        }
-
-        /* Mobile Fixes */
-        @media (max-width: 768px) {
-            .desktop-nav { display: none; }
-            .container { padding-top: 140px; }
-            h1 { font-size: 2.5rem; }
-            .links-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
-            .link-box { padding: 30px 10px; font-size: 1rem; }
-            .nav-menu { top: 55px; width: 240px; }
-        }
-    </style>
-</head>
 <body>
     <div id="header"></div>
 
     <div class="container">
-        <h1>Montreal Shul Directory</h1>
-        <p class="subtitle">Quick links to the location And information for each shul</p>
+        <h1>Resources</h1>
+        <p class="subtitle">Select a category to find what you're looking for</p>
 
         <div class="links-grid">
-            <a href="/shul-info">Shul Information</a>
-            <a href="/minyanim">Minyanim</a>
+            <a href="/shuls/shul-info" class="link-box">Shul Information</a>
+            <a href="/shuls/minyanim" class="link-box">Minyanim</a>
         </div>
 
         <div class="back-link">
@@ -201,14 +18,20 @@
     <div id="footer"></div>
 
     <script>
-        // Load header and footer (using / for root directory)
+        // Loading from root directory /
         fetch('/header.html')
             .then(response => response.text())
-            .then(data => document.getElementById('header').innerHTML = data);
+            .then(data => {
+                document.getElementById('header').innerHTML = data;
+            })
+            .catch(err => console.error('Error loading header:', err));
 
         fetch('/footer.html')
             .then(response => response.text())
-            .then(data => document.getElementById('footer').innerHTML = data);
+            .then(data => {
+                document.getElementById('footer').innerHTML = data;
+            })
+            .catch(err => console.error('Error loading footer:', err));
 
         function toggleMenu() {
             const hamburger = document.querySelector('.hamburger');
@@ -231,4 +54,3 @@
         }
     </script>
 </body>
-</html>
