@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Coming Soon • FindMTL.ca</title>
+    <title>Resources • FindMTL.ca</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body, html {
@@ -17,9 +17,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
             min-height: 100vh;
         }
+
         /* Fixed Header */
         header {
             position: fixed;
@@ -65,69 +65,82 @@
         .desktop-nav a:hover { color: #3498db; }
 
         /* Hamburger & Floating Menu */
-        .hamburger {
-            cursor: pointer;
-            padding: 5px;
-            display: block;
-        }
+        .hamburger { cursor: pointer; padding: 5px; display: block; }
         .hamburger span {
-            display: block;
-            width: 30px;
-            height: 3px;
-            background: white;
-            margin: 6px 0;
-            transition: 0.4s;
-            border-radius: 2px;
+            display: block; width: 30px; height: 3px; background: white;
+            margin: 6px 0; transition: 0.4s; border-radius: 2px;
         }
         .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
         .hamburger.active span:nth-child(2) { opacity: 0; }
         .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
 
         .nav-menu {
-            position: absolute;
-            z-index: 1100;
-            top: 60px;
-            right: 0;
-            background: rgba(4, 5, 5, 0.98);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-            display: none;
-            flex-direction: column;
-            gap: 8px;
-            min-width: 240px;
-            text-align: right;
+            position: absolute; z-index: 1100; top: 60px; right: 0;
+            background: rgba(4, 5, 5, 0.98); border-radius: 15px; padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7); display: none;
+            flex-direction: column; gap: 8px; min-width: 240px; text-align: right;
         }
         .nav-menu.active { display: flex; }
         .nav-menu a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 500;
-            padding: 10px 16px;
-            border-radius: 10px;
-            transition: background 0.3s;
+            color: white; text-decoration: none; font-size: 1.1rem; padding: 10px 16px;
+            border-radius: 10px; transition: background 0.3s;
         }
         .nav-menu a:hover { background: rgba(52, 152, 219, 0.4); }
 
-        /* Container & Spacing */
+        /* Container */
         .container {
-            max-width: 90%;
+            max-width: 1100px;
             width: 100%;
             padding: 160px 20px 60px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            position: relative;
             box-sizing: border-box;
+            text-align: center;
         }
 
-        h1 { font-size: 4rem; margin-bottom: 20px; letter-spacing: 2px; font-weight: 300; }
-        .subtitle { font-size: 1.8rem; margin-bottom: 30px; font-style: italic; opacity: 0.9; }
-        p { font-size: 1.3rem; line-height: 1.6; margin-bottom: 50px; opacity: 0.9; max-width: 90%; padding: 0 10px; }
+        h1 { font-size: 3.5rem; margin-bottom: 20px; letter-spacing: 1px; font-weight: 300; }
+        .subtitle { font-size: 1.3rem; margin-bottom: 40px; opacity: 0.9; line-height: 1.6; }
 
-        /* Footer Spacing Fixed */
+        /* Links Grid - Using the glassmorphism from your form card */
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .link-box {
+            background: rgba(255, 255, 255, 0.15); /* Matches contact-form-card */
+            backdrop-filter: blur(10px);
+            padding: 40px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.4s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .link-box:hover {
+            background: #2980b9;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+        }
+
+        .back-link { margin-top: 40px; }
+        .back-link a { color: #3498db; text-decoration: none; font-size: 1.1rem; }
+        .back-link a:hover { text-decoration: underline; }
+
+        /* Footer */
         footer {
             width: 100%;
             padding: 40px 20px;
@@ -149,62 +162,22 @@
             color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
             font-size: 0.95rem;
-            transition: color 0.3s;
         }
         .footer-links a:hover { color: white; }
         .copyright {
             font-size: 0.85rem;
             opacity: 0.7;
+            text-align: center;
         }
 
-        /* Mobile-specific fixes */
+        /* Mobile Fixes */
         @media (max-width: 768px) {
             .desktop-nav { display: none; }
-            header { padding: 12px 0; }
-            .container {
-                padding-top: 180px;
-                justify-content: flex-start;
-            }
-            h1 {
-                font-size: 2.8rem;
-                letter-spacing: 1px;
-            }
-            .subtitle {
-                font-size: 1.4rem;
-            }
-            p {
-                font-size: 1.1rem;
-                max-width: 95%;
-            }
-            .hamburger {
-                top: 20px;
-                right: 15px;
-            }
-            .hamburger span {
-                width: 28px;
-                height: 3px;
-            }
-            .nav-menu {
-                top: 70px;
-                right: 15px;
-                min-width: 180px;
-                padding: 15px;
-            }
-            .nav-menu a {
-                font-size: 1rem;
-                padding: 10px 14px;
-            }
-        }
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 2.4rem;
-            }
-            .subtitle {
-                font-size: 1.2rem;
-            }
-            p {
-                font-size: 1rem;
-            }
+            .container { padding-top: 140px; }
+            h1 { font-size: 2.5rem; }
+            .links-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+            .link-box { padding: 30px 10px; font-size: 1rem; }
+            .nav-menu { top: 55px; width: 240px; }
         }
     </style>
 </head>
@@ -212,31 +185,33 @@
     <div id="header"></div>
 
     <div class="container">
-        <h1>Coming Soon</h1>
-        <div class="subtitle">We're Working on Something Special</div>
-        <p>This section is under construction.<br>
-        Thank you for your patience – exciting things are on the way!</p>
+        <h1>Montreal Kosher Food Directory</h1>
+        <p class="subtitle">Quick links to All Kosher Food Stores in Montreal</p>
+
+        <div class="links-grid">
+            <a href="/food/outremont" class="link-box">Outremont Area</a>
+            <a href="/food/devimy" class="link-box">De Vimy Area</a>
+            <a href="/food/westbury" class="link-box">Westbury Area</a>
+            <a href="/food/cotesaintluc" class="link-box">Cote Saint-Luc Area</a>
+            <a href="/food/other" class="link-box">All Other Areas</a>
+        </div>
+
+        <div class="back-link">
+            <a href="/">← Back to Home</a>
+        </div>
     </div>
 
     <div id="footer"></div>
 
     <script>
-        // Since this page is in a subfolder (e.g., shuls/index.html), load from root
-        fetch('../header.html')
-            .then(response => {
-                if (!response.ok) throw new Error('Header not found');
-                return response.text();
-            })
-            .then(data => document.getElementById('header').innerHTML = data)
-            .catch(err => console.error(err));
+        // Load header and footer (using / for root directory)
+        fetch('/header.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('header').innerHTML = data);
 
-        fetch('../footer.html')
-            .then(response => {
-                if (!response.ok) throw new Error('Footer not found');
-                return response.text();
-            })
-            .then(data => document.getElementById('footer').innerHTML = data)
-            .catch(err => console.error(err));
+        fetch('/footer.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('footer').innerHTML = data);
 
         function toggleMenu() {
             const hamburger = document.querySelector('.hamburger');
