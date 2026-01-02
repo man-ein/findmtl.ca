@@ -6,88 +6,83 @@
     <title>Coming Soon • FindMTL.ca</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* 1. Global Reset */
+        * { box-sizing: border-box; }
         body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
+            margin: 0; padding: 0; height: 100%;
             font-family: 'Helvetica', 'Arial', sans-serif;
             color: #ffffff;
             background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('https://media.istockphoto.com/id/478489838/photo/panoramic-picture-of-montreal-cityscape-at-sunset.jpg?s=612x612&w=0&k=20&c=78iWttuKv4r2Qz7U4QhLKnYg3Uy4zUumzNkHTq14DWo=') no-repeat center center fixed;
             background-size: cover;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
+            display: flex; flex-direction: column;
             min-height: 100vh;
         }
 
-        /* Fixed Header */
-        header {
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            padding: 15px 0;
-            z-index: 1000;
+        /* 2. Header Injection Point - Keeps it fixed at top */
+        #header-injection {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
         }
 
+        /* 3. Main Content Container */
         .container {
-            max-width: 90%; width: 100%; padding: 160px 20px 60px;
-            flex-grow: 1; display: flex; flex-direction: column;
-            justify-content: center; position: relative; box-sizing: border-box;
+            flex: 1 0 auto; /* Pushes footer down */
+            width: 100%;
+            max-width: 90%;
+            margin: 0 auto;
+            padding: 140px 20px 40px; /* Space for the fixed header */
+            display: flex; flex-direction: column;
+            align-items: center; text-align: center;
         }
 
-        /* --- FOOTER COLOR FIX --- */
-        #footer, #footer * {
-            color: rgba(255, 255, 255, 0.8) !important;
-        }
-        #footer a:hover {
-            color: #ffffff !important;
-        }
-        #footer .copyright {
-            opacity: 0.7 !important;
-        }
-
-        footer {
-            width: 100%; padding: 40px 20px; background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px); box-sizing: border-box;
-            display: flex; flex-direction: column; align-items: center; gap: 20px;
-        }
-
-        /* --- ZOOM ANIMATION --- */
+        /* 4. Text & Animation */
         @keyframes softZoom {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05); } 
+            50% { transform: scale(1.03); } 
             100% { transform: scale(1); }
         }
         .zoom-text { display: inline-block; width: 100%; animation: softZoom 2.5s infinite ease-in-out; }
+        h1 { font-size: 4rem; margin-bottom: 20px; font-weight: 300; letter-spacing: 2px; }
+        .subtitle { font-size: 1.8rem; margin-bottom: 15px; font-style: italic; opacity: 0.9; }
+        .bottom-note { font-size: 1.2rem; margin: 40px 0; opacity: 0.8; }
 
-        /* --- FORM STYLING --- */
+        /* 5. Form Styling */
         .form-wrapper {
-            width: 100%; max-width: 700px; margin: 0 auto 40px;
+            width: 100%; max-width: 700px; margin: 20px auto;
             background: rgba(255, 255, 255, 0.1); border-radius: 15px;
             padding: 10px; backdrop-filter: blur(10px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        iframe { width: 100%; border: none; border-radius: 10px; background-color: white; }
+        iframe { width: 100%; border: none; border-radius: 10px; background-color: white; height: 800px; }
 
-        h1 { font-size: 4rem; margin-bottom: 20px; letter-spacing: 2px; font-weight: 300; }
-        .subtitle { font-size: 1.8rem; margin-bottom: 30px; font-style: italic; opacity: 0.9; }
-        p { font-size: 1.3rem; line-height: 1.6; margin-bottom: 50px; opacity: 0.9; }
+        /* 6. Footer Injection Point - Forces correct spacing and colors */
+        #footer-injection {
+            flex-shrink: 0;
+            width: 100%;
+        }
+        /* Specificity hack to fix footer colors without breaking layout */
+        #footer-injection * {
+            color: rgba(255, 255, 255, 0.8) !important;
+        }
+        #footer-injection a:hover {
+            color: #ffffff !important;
+        }
 
+        /* 7. Mobile Adjustments */
         @media (max-width: 768px) {
-            header { padding: 12px 0; }
-            .container { padding-top: 180px; justify-content: flex-start; }
+            .container { padding-top: 110px; }
             h1 { font-size: 2.8rem; }
+            .subtitle { font-size: 1.3rem; }
             iframe { height: 600px; }
         }
     </style>
 </head>
 <body>
-    <div id="header"></div>
 
-    <div class="container">
+    <div id="header-injection"></div>
+
+    <main class="container">
         <h1>Coming Soon</h1>
+        
         <div class="subtitle zoom-text">If you have any information you can provide,</div>
         <div class="subtitle zoom-text">Such as names, addresses, or hours</div>
         <div class="subtitle zoom-text">Please help the community and fill out the form below</div>
@@ -95,27 +90,42 @@
         <div class="form-wrapper">
             <iframe 
                 src="https://docs.google.com/forms/d/e/1FAIpQLSfSBxHqk6YqcSc5aI9bHk-K_PJ2IL0EyWN2_ygZn-q80rqnRg/viewform?embedded=true" 
-                height="800" 
                 frameborder="0">
                 Loading…
             </iframe>
         </div>
 
-        <p>This section is under construction.<br>
+        <p class="bottom-note">This section is under construction.<br>
         Thanks so much for submitting the information, you are helping out your community!</p>
-    </div>
+    </main>
 
-    <div id="footer"></div>
+    <div id="footer-injection"></div>
 
     <script>
-        fetch('/header.html').then(r => r.text()).then(d => document.getElementById('header').innerHTML = d);
-        fetch('/footer.html').then(r => r.text()).then(d => document.getElementById('footer').innerHTML = d);
+        // Use your working fetch logic
+        async function loadLayout() {
+            try {
+                const [h, f] = await Promise.all([
+                    fetch('/header.html').then(r => r.text()),
+                    fetch('/footer.html').then(r => r.text())
+                ]);
+                document.getElementById('header-injection').innerHTML = h;
+                document.getElementById('footer-injection').innerHTML = f;
+            } catch (err) {
+                console.error("Layout load failed", err);
+            }
+        }
+        loadLayout();
 
-        function toggleMenu() {
+        // Ensure toggle function is available globally
+        window.toggleMenu = function() {
             const h = document.querySelector('.hamburger');
             const m = document.getElementById('navMenu');
-            if (h && m) { h.classList.toggle('active'); m.classList.toggle('active'); }
-        }
+            if (h && m) {
+                h.classList.toggle('active');
+                m.classList.toggle('active');
+            }
+        };
     </script>
 </body>
 </html>
