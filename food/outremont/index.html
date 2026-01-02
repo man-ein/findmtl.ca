@@ -6,6 +6,7 @@
     <title>Coming Soon • FindMTL.ca</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* Basic Setup */
         body, html {
             margin: 0;
             padding: 0;
@@ -21,18 +22,25 @@
             min-height: 100vh;
         }
 
-        /* --- ANIMATION --- */
+        /* Container & Spacing - Ensures content doesn't hide under fixed header */
+        .container {
+            max-width: 90%;
+            width: 100%;
+            padding: 120px 20px 60px; /* Top padding for fixed header */
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        /* --- ZOOMING ANIMATION --- */
         @keyframes softZoom {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); } 
             100% { transform: scale(1); }
         }
-
-        .zoom-text {
-            display: inline-block; 
-            width: 100%;
-            animation: softZoom 2.5s infinite ease-in-out;
-        }
+        .zoom-text { display: inline-block; width: 100%; animation: softZoom 2.5s infinite ease-in-out; }
 
         /* --- FORM EMBED --- */
         .form-wrapper {
@@ -45,40 +53,22 @@
             backdrop-filter: blur(10px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
+        iframe { width: 100%; border: none; border-radius: 10px; background-color: white; }
 
-        iframe {
-            width: 100%;
-            border: none;
-            border-radius: 10px;
-            background-color: white;
-        }
-
-        /* Container & Spacing */
-        .container {
-            max-width: 90%;
-            width: 100%;
-            padding: 160px 20px 60px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            box-sizing: border-box;
-        }
-
-        h1 { font-size: 4rem; margin-bottom: 20px; letter-spacing: 2px; font-weight: 300; }
+        h1 { font-size: 4rem; margin-bottom: 20px; font-weight: 300; }
         .subtitle { font-size: 1.8rem; margin-bottom: 15px; font-style: italic; opacity: 0.9; }
-        p { font-size: 1.3rem; line-height: 1.6; margin-top: 20px; margin-bottom: 50px; opacity: 0.9; max-width: 90%; padding: 0 10px; }
+        .success-text { font-size: 1.3rem; margin-top: 20px; opacity: 0.9; }
 
         @media (max-width: 768px) {
             h1 { font-size: 2.8rem; }
             .subtitle { font-size: 1.4rem; }
-            iframe { height: 700px; }
+            .container { padding-top: 100px; }
         }
     </style>
 </head>
 <body>
-    <header id="header-container"></header>
+
+    <div id="header-part"></div>
 
     <div class="container">
         <h1>Coming Soon</h1>
@@ -91,45 +81,38 @@
             <iframe 
                 src="https://docs.google.com/forms/d/e/1FAIpQLSfSBxHqk6YqcSc5aI9bHk-K_PJ2IL0EyWN2_ygZn-q80rqnRg/viewform?embedded=true" 
                 height="800" 
-                frameborder="0" 
-                marginheight="0" 
-                marginwidth="0">
+                frameborder="0">
                 Loading…
             </iframe>
         </div>
 
-        <p>This section is under construction.<br>
+        <p class="success-text">This section is under construction.<br>
         Thanks so much for submitting the information, you are helping out your community!</p>
     </div>
 
-    <footer id="footer-container"></footer>
+    <div id="footer-part"></div>
 
     <script>
-        // Use relative paths to ensure it works from the main directory
-        // These paths assume header.html and footer.html are in the same folder as this file
-        fetch('header.html')
-            .then(response => {
-                if (!response.ok) throw new Error('Header file not found');
-                return response.text();
-            })
-            .then(data => {
-                document.getElementById('header-container').innerHTML = data;
-            })
-            .catch(err => console.error('Error loading header:', err));
+        // Use "/" at the start of the path to look in the main directory (root)
+        // Note: This only works when uploaded to a server (or using Live Server in VS Code)
+        
+        async function loadPartials() {
+            try {
+                const headRes = await fetch('/header.html');
+                if (headRes.ok) {
+                    document.getElementById('header-part').innerHTML = await headRes.text();
+                }
 
-        fetch('footer.html')
-            .then(response => {
-                if (!response.ok) throw new Error('Footer file not found');
-                return response.text();
-            })
-            .then(data => {
-                document.getElementById('footer-container').innerHTML = data;
-            })
-            .catch(err => console.error('Error loading footer:', err));
+                const footRes = await fetch('/footer.html');
+                if (footRes.ok) {
+                    document.getElementById('footer-part').innerHTML = await footRes.text();
+                }
+            } catch (err) {
+                console.error("Could not load header/footer. Check if files exist at root.", err);
+            }
+        }
 
-        // Note: If your hamburger menu is INSIDE the header.html, 
-        // you may need to re-initialize your click listeners inside the 
-        // .then() block above to make sure they work after the HTML is injected.
+        loadPartials();
     </script>
 </body>
 </html>
