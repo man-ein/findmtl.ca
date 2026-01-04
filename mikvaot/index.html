@@ -1,6 +1,38 @@
 <!DOCTYPE html>
-<html lan
-    <script type="module" src="/auth-check.js"></script>
+<html lang="en">
+<head>
+    <style id="auth-hide">
+        body { display: none !important; }
+    </style>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyB7JMjJWrc9891M4deOdyzwEV4FPv2ZPz0",
+            authDomain: "findmtl.firebaseapp.com",
+            projectId: "findmtl",
+            storageBucket: "findmtl.firebasestorage.app",
+            messagingSenderId: "421014588678",
+            appId: "1:421014588678:web:e7b95a655cfcd05503e287"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is logged in, reveal the page
+                const hideStyle = document.getElementById('auth-hide');
+                if (hideStyle) hideStyle.remove();
+            } else {
+                // No user, send back to login
+                window.location.href = "/login.html";
+            }
+        });
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Coming Soon • FindMTL.ca</title>
@@ -33,38 +65,7 @@
             width: 100%;
             animation: softZoom 2.5s infinite ease-in-out;
         }
-        /* Footer Spacing Fixed */
-        footer {
-            width: 100%;
-            padding: 40px 20px;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-        .footer-links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.3s;
-        }
-        .footer-links a:hover { color: white; }
-        .copyright {
-            font-size: 0.85rem;
-            opacity: 0.7;
-        }
 
-
-        /* Fixed Header Styles (from your base) */
         header {
             position: fixed;
             top: 0;
@@ -75,6 +76,7 @@
             padding: 15px 0;
             z-index: 1000;
         }
+        
         .header-content {
             max-width: 90%;
             width: 100%;
@@ -83,36 +85,7 @@
             justify-content: space-between;
             align-items: center;
         }
-        .logo { font-size: 1.8rem; font-weight: bold; color: white; text-decoration: none; }
-        .nav-wrapper { display: flex; align-items: center; gap: 20px; position: relative; }
-        .desktop-nav { display: flex; gap: 25px; }
-        .desktop-nav a { color: white; text-decoration: none; font-size: 1.1rem; font-weight: 500; transition: color 0.3s; }
-        .desktop-nav a:hover { color: #3498db; }
 
-        /* Hamburger & Floating Menu */
-        .hamburger { cursor: pointer; padding: 5px; display: block; }
-        .hamburger span {
-            display: block; width: 30px; height: 3px; background: white; margin: 6px 0;
-            transition: 0.4s; border-radius: 2px;
-        }
-        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
-        .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
-
-        .nav-menu {
-            position: absolute; z-index: 1100; top: 60px; right: 0;
-            background: rgba(4, 5, 5, 0.98); border-radius: 15px; padding: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7); display: none;
-            flex-direction: column; gap: 8px; min-width: 240px; text-align: right;
-        }
-        .nav-menu.active { display: flex; }
-        .nav-menu a {
-            color: white; text-decoration: none; font-size: 1.1rem;
-            font-weight: 500; padding: 10px 16px; border-radius: 10px; transition: background 0.3s;
-        }
-        .nav-menu a:hover { background: rgba(52, 152, 219, 0.4); }
-
-        /* --- FORM EMBED STYLING --- */
         .form-wrapper {
             width: 100%;
             max-width: 700px;
@@ -123,6 +96,7 @@
             backdrop-filter: blur(10px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
+
         iframe {
             width: 100%;
             border: none;
@@ -130,7 +104,6 @@
             background-color: white;
         }
 
-        /* Container & Spacing */
         .container {
             max-width: 90%;
             width: 100%;
@@ -147,20 +120,15 @@
         .subtitle { font-size: 1.8rem; margin-bottom: 15px; font-style: italic; opacity: 0.9; }
         p { font-size: 1.3rem; line-height: 1.6; margin-top: 20px; margin-bottom: 50px; opacity: 0.9; max-width: 90%; padding: 0 10px; }
 
-        /* Footer (from your base) */
         footer {
             width: 100%; padding: 40px 20px; background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(10px); box-sizing: border-box; display: flex;
             flex-direction: column; align-items: center; gap: 20px;
         }
 
-        /* Mobile-specific fixes */
         @media (max-width: 768px) {
-            .desktop-nav { display: none; }
-            header { padding: 12px 0; }
-            .container { padding-top: 180px; justify-content: flex-start; }
-            h1 { font-size: 2.8rem; letter-spacing: 1px; }
-            .subtitle { font-size: 1.4rem; }
+            .container { padding-top: 180px; }
+            h1 { font-size: 2.8rem; }
             iframe { height: 700px; }
         }
     </style>
@@ -193,43 +161,15 @@
     <div id="footer"></div>
 
     <script>
-        // Use your base fetch logic
         fetch('/header.html')
-            .then(response => {
-                if (!response.ok) throw new Error('Header not found');
-                return response.text();
-            })
+            .then(response => response.ok ? response.text() : Promise.reject())
             .then(data => document.getElementById('header').innerHTML = data)
-            .catch(err => console.error(err));
+            .catch(err => console.error('Header fetch failed'));
 
         fetch('/footer.html')
-            .then(response => {
-                if (!response.ok) throw new Error('Footer not found');
-                return response.text();
-            })
+            .then(response => response.ok ? response.text() : Promise.reject())
             .then(data => document.getElementById('footer').innerHTML = data)
-            .catch(err => console.error(err));
-
-        function toggleMenu() {
-            const hamburger = document.querySelector('.hamburger');
-            const menu = document.getElementById('navMenu');
-            if (hamburger && menu) {
-                hamburger.classList.toggle('active');
-                menu.classList.toggle('active');
-            }
-        }
-
-        window.onclick = function(event) {
-            if (!event.target.closest('.nav-wrapper')) {
-                const hamburger = document.querySelector('.hamburger');
-                const menu = document.getElementById('navMenu');
-                if (hamburger && hamburger.classList.contains('active')) {
-                    hamburger.classList.remove('active');
-                    menu.classList.remove('active');
-                }
-            }
-        }
+            .catch(err => console.error('Footer fetch failed'));
     </script>
 </body>
-
 </html>
