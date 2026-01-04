@@ -36,6 +36,7 @@
             border: none;
             background: rgba(255,255,255,0.9);
             box-sizing: border-box;
+            color: #333;
         }
         button {
             width: 100%;
@@ -55,13 +56,13 @@
 </head>
 <body>
 
-    <div class="login-box">
+<div class="login-box">
     <h2 id="title">Sign In</h2>
     <input type="email" id="email" placeholder="Email Address">
     <input type="password" id="password" placeholder="Password">
     <button id="mainBtn">Login</button>
 
-    <button onclick="loginWithGoogle()" style="background: white; color: #444; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+    <button id="googleBtn" style="background: white; color: #444; margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 12px; border-radius: 8px; border: none; cursor: pointer; font-weight: bold;">
         <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" width="18"> 
         Sign in with Google
     </button>
@@ -70,54 +71,76 @@
     <p id="error-msg" style="color: #ff7675; margin-top: 10px; font-size: 0.8rem;"></p>
 </div>
 
-    <script type="module">
-        // 1. Import Firebase
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
+<script type="module">
+    // 1. Import Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-app.js";
+    import { 
+        getAuth, 
+        signInWithEmailAndPassword, 
+        createUserWithEmailAndPassword, 
+        GoogleAuthProvider, 
+        signInWithPopup 
+    } from "https://www.gstatic.com/firebasejs/10.7.0/firebase-auth.js";
 
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-  apiKey: "AIzaSyB7JMjJWrc9891M4deOdyzwEV4FPv2ZPz0",
-  authDomain: "findmtl.firebaseapp.com",
-  projectId: "findmtl",
-  storageBucket: "findmtl.firebasestorage.app",
-  messagingSenderId: "421014588678",
-  appId: "1:421014588678:web:e7b95a655cfcd05503e287",
-  measurementId: "G-233CWS0868"
-};
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
+    const firebaseConfig = {
+        apiKey: "AIzaSyB7JMjJWrc9891M4deOdyzwEV4FPv2ZPz0",
+        authDomain: "findmtl.firebaseapp.com",
+        projectId: "findmtl",
+        storageBucket: "findmtl.firebasestorage.app",
+        messagingSenderId: "421014588678",
+        appId: "1:421014588678:web:e7b95a655cfcd05503e287",
+        measurementId: "G-233CWS0868"
+    };
 
-        let isLogin = true;
+    // 2. Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const provider = new GoogleAuthProvider();
 
-        // Toggle between Login and Sign Up
-        const toggleLink = document.getElementById('toggleLink');
-        const mainBtn = document.getElementById('mainBtn');
-        const title = document.getElementById('title');
+    let isLogin = true;
 
-        toggleLink.onclick = () => {
-            isLogin = !isLogin;
-            title.innerText = isLogin ? "Sign In" : "Create Account";
-            mainBtn.innerText = isLogin ? "Login" : "Sign Up";
-            toggleLink.innerText = isLogin ? "Don't have an account? Sign Up" : "Already have an account? Login";
-        };
+    // Elements
+    const toggleLink = document.getElementById('toggleLink');
+    const mainBtn = document.getElementById('mainBtn');
+    const googleBtn = document.getElementById('googleBtn');
+    const title = document.getElementById('title');
+    const errorMsg = document.getElementById('error-msg');
 
-        // Handle Form Submission
-        mainBtn.onclick = () => {
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const errorMsg = document.getElementById('error-msg');
+    // Toggle between Login and Sign Up
+    toggleLink.onclick = () => {
+        isLogin = !isLogin;
+        title.innerText = isLogin ? "Sign In" : "Create Account";
+        mainBtn.innerText = isLogin ? "Login" : "Sign Up";
+        toggleLink.innerText = isLogin ? "Don't have an account? Sign Up" : "Already have an account? Login";
+    };
 
-            if (isLogin) {
-                signInWithEmailAndPassword(auth, email, password)
-                    .then(() => window.location.href = "index.html")
-                    .catch(err => errorMsg.innerText = "Error: " + err.message);
-            } else {
-                createUserWithEmailAndPassword(auth, email, password)
-                    .then(() => window.location.href = "index.html")
-                    .catch(err => errorMsg.innerText = "Error: " + err.message);
-            }
-        };
-    </script>
+    // Handle Email/Password Form
+    mainBtn.onclick = () => {
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        if (isLogin) {
+            signInWithEmailAndPassword(auth, email, password)
+                .then(() => window.location.href = "index.html")
+                .catch(err => errorMsg.innerText = "Error: " + err.message);
+        } else {
+            createUserWithEmailAndPassword(auth, email, password)
+                .then(() => window.location.href = "index.html")
+                .catch(err => errorMsg.innerText = "Error: " + err.message);
+        }
+    };
+
+    // Handle Google Sign-In
+    googleBtn.addEventListener('click', () => {
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                window.location.href = "index.html";
+            })
+            .catch((error) => {
+                errorMsg.innerText = "Google Error: " + error.message;
+            });
+    });
+</script>
+
 </body>
 </html>
