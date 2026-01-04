@@ -20,113 +20,19 @@
             text-align: center;
             min-height: 100vh;
         }
-        /* Fixed Header */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
+
+        /* --- ZOOMING ANIMATION --- */
+        @keyframes softZoom {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); } 
+            100% { transform: scale(1); }
+        }
+
+        .zoom-text {
+            display: inline-block; 
             width: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            padding: 15px 0;
-            z-index: 1000;
+            animation: softZoom 2.5s infinite ease-in-out;
         }
-        .header-content {
-            max-width: 90%;
-            width: 100%;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: white;
-            text-decoration: none;
-        }
-        .nav-wrapper {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            position: relative;
-        }
-        .desktop-nav {
-            display: flex;
-            gap: 25px;
-        }
-        .desktop-nav a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        .desktop-nav a:hover { color: #3498db; }
-
-        /* Hamburger & Floating Menu */
-        .hamburger {
-            cursor: pointer;
-            padding: 5px;
-            display: block;
-        }
-        .hamburger span {
-            display: block;
-            width: 30px;
-            height: 3px;
-            background: white;
-            margin: 6px 0;
-            transition: 0.4s;
-            border-radius: 2px;
-        }
-        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
-        .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
-
-        .nav-menu {
-            position: absolute;
-            z-index: 1100;
-            top: 60px;
-            right: 0;
-            background: rgba(4, 5, 5, 0.98);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-            display: none;
-            flex-direction: column;
-            gap: 8px;
-            min-width: 240px;
-            text-align: right;
-        }
-        .nav-menu.active { display: flex; }
-        .nav-menu a {
-            color: white;
-            text-decoration: none;
-            font-size: 1.1rem;
-            font-weight: 500;
-            padding: 10px 16px;
-            border-radius: 10px;
-            transition: background 0.3s;
-        }
-        .nav-menu a:hover { background: rgba(52, 152, 219, 0.4); }
-
-        /* Container & Spacing */
-        .container {
-            max-width: 90%;
-            width: 100%;
-            padding: 160px 20px 60px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            box-sizing: border-box;
-        }
-
-        h1 { font-size: 4rem; margin-bottom: 20px; letter-spacing: 2px; font-weight: 300; }
-        .subtitle { font-size: 1.8rem; margin-bottom: 30px; font-style: italic; opacity: 0.9; }
-        p { font-size: 1.3rem; line-height: 1.6; margin-bottom: 50px; opacity: 0.9; max-width: 90%; padding: 0 10px; }
-
         /* Footer Spacing Fixed */
         footer {
             width: 100%;
@@ -157,54 +63,105 @@
             opacity: 0.7;
         }
 
+
+        /* Fixed Header Styles (from your base) */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            z-index: 1000;
+        }
+        .header-content {
+            max-width: 90%;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo { font-size: 1.8rem; font-weight: bold; color: white; text-decoration: none; }
+        .nav-wrapper { display: flex; align-items: center; gap: 20px; position: relative; }
+        .desktop-nav { display: flex; gap: 25px; }
+        .desktop-nav a { color: white; text-decoration: none; font-size: 1.1rem; font-weight: 500; transition: color 0.3s; }
+        .desktop-nav a:hover { color: #3498db; }
+
+        /* Hamburger & Floating Menu */
+        .hamburger { cursor: pointer; padding: 5px; display: block; }
+        .hamburger span {
+            display: block; width: 30px; height: 3px; background: white; margin: 6px 0;
+            transition: 0.4s; border-radius: 2px;
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+        .nav-menu {
+            position: absolute; z-index: 1100; top: 60px; right: 0;
+            background: rgba(4, 5, 5, 0.98); border-radius: 15px; padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7); display: none;
+            flex-direction: column; gap: 8px; min-width: 240px; text-align: right;
+        }
+        .nav-menu.active { display: flex; }
+        .nav-menu a {
+            color: white; text-decoration: none; font-size: 1.1rem;
+            font-weight: 500; padding: 10px 16px; border-radius: 10px; transition: background 0.3s;
+        }
+        .nav-menu a:hover { background: rgba(52, 152, 219, 0.4); }
+
+        /* --- FORM EMBED STYLING --- */
+        .form-wrapper {
+            width: 100%;
+            max-width: 700px;
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 10px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        iframe {
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            background-color: white;
+        }
+
+        /* Container & Spacing */
+        .container {
+            max-width: 90%;
+            width: 100%;
+            padding: 160px 20px 60px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            box-sizing: border-box;
+        }
+
+        h1 { font-size: 4rem; margin-bottom: 20px; letter-spacing: 2px; font-weight: 300; }
+        .subtitle { font-size: 1.8rem; margin-bottom: 15px; font-style: italic; opacity: 0.9; }
+        p { font-size: 1.3rem; line-height: 1.6; margin-top: 20px; margin-bottom: 50px; opacity: 0.9; max-width: 90%; padding: 0 10px; }
+
+        /* Footer (from your base) */
+        footer {
+            width: 100%; padding: 40px 20px; background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px); box-sizing: border-box; display: flex;
+            flex-direction: column; align-items: center; gap: 20px;
+        }
+
         /* Mobile-specific fixes */
         @media (max-width: 768px) {
             .desktop-nav { display: none; }
             header { padding: 12px 0; }
-            .container {
-                padding-top: 180px;
-                justify-content: flex-start;
-            }
-            h1 {
-                font-size: 2.8rem;
-                letter-spacing: 1px;
-            }
-            .subtitle {
-                font-size: 1.4rem;
-            }
-            p {
-                font-size: 1.1rem;
-                max-width: 95%;
-            }
-            .hamburger {
-                top: 20px;
-                right: 15px;
-            }
-            .hamburger span {
-                width: 28px;
-                height: 3px;
-            }
-            .nav-menu {
-                top: 70px;
-                right: 15px;
-                min-width: 180px;
-                padding: 15px;
-            }
-            .nav-menu a {
-                font-size: 1rem;
-                padding: 10px 14px;
-            }
-        }
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 2.4rem;
-            }
-            .subtitle {
-                font-size: 1.2rem;
-            }
-            p {
-                font-size: 1rem;
-            }
+            .container { padding-top: 180px; justify-content: flex-start; }
+            h1 { font-size: 2.8rem; letter-spacing: 1px; }
+            .subtitle { font-size: 1.4rem; }
+            iframe { height: 700px; }
         }
     </style>
 </head>
@@ -213,16 +170,31 @@
 
     <div class="container">
         <h1>Coming Soon</h1>
-        <div class="subtitle">We're Working on Something Special</div>
+        
+        <div class="subtitle zoom-text">If you have any information you can provide,</div>
+        <div class="subtitle zoom-text">Such as names, addresses, or hours</div>
+        <div class="subtitle zoom-text">Please help the community and fill out the form below</div>
+
+        <div class="form-wrapper">
+            <iframe 
+                src="https://docs.google.com/forms/d/e/1FAIpQLSfSBxHqk6YqcSc5aI9bHk-K_PJ2IL0EyWN2_ygZn-q80rqnRg/viewform?embedded=true" 
+                height="800" 
+                frameborder="0" 
+                marginheight="0" 
+                marginwidth="0">
+                Loading…
+            </iframe>
+        </div>
+
         <p>This section is under construction.<br>
-        Thank you for your patience – exciting things are on the way!</p>
+        Thanks so much for submitting the information, you are helping out your community!</p>
     </div>
 
     <div id="footer"></div>
 
     <script>
-        // Since this page is in a subfolder (e.g., shuls/index.html), load from root
-        fetch('../header.html')
+        // Use your base fetch logic
+        fetch('/header.html')
             .then(response => {
                 if (!response.ok) throw new Error('Header not found');
                 return response.text();
@@ -230,7 +202,7 @@
             .then(data => document.getElementById('header').innerHTML = data)
             .catch(err => console.error(err));
 
-        fetch('../footer.html')
+        fetch('/footer.html')
             .then(response => {
                 if (!response.ok) throw new Error('Footer not found');
                 return response.text();
