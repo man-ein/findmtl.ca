@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Westmount • FindMTL.ca</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body, html {
+            margin: 0; padding: 0; height: 100%;
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            color: #ffffff;
+            background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('https://media.istockphoto.com/id/478489838/photo/panoramic-picture-of-montreal-cityscape-at-sunset.jpg?s=612x612&w=0&k=20&c=78iWttuKv4r2Qz7U4QhLKnYg3Uy4zUumzNkHTq14DWo=') no-repeat center center fixed;
+            background-size: cover; display: flex; flex-direction: column; align-items: center; min-height: 100vh;
+        }
+        .container { max-width: 1100px; width: 100%; padding: 140px 20px 60px; flex-grow: 1; display: flex; flex-direction: column; box-sizing: border-box; }
+        .header-section { text-align: center; margin-bottom: 40px; }
+        h1 { font-size: 2.8rem; margin-bottom: 10px; font-weight: 300; }
+        .breadcrumb { font-size: 1rem; opacity: 0.7; margin-bottom: 20px; }
+        .breadcrumb a { color: #3498db; text-decoration: none; }
+        .listings-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; width: 100%; }
+        .listing-card { background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(12px); padding: 25px; border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1); transition: all 0.3s ease; display: flex; flex-direction: column; justify-content: space-between; }
+        .listing-card:hover { background: rgba(255, 255, 255, 0.15); transform: translateY(-5px); border-color: #3498db; }
+        .shul-name { font-size: 1.3rem; font-weight: bold; margin-bottom: 8px; color: #ffffff; }
+        .shul-address { font-size: 0.95rem; opacity: 0.8; margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+        .shul-address i { color: #3498db; }
+        .btn { flex: 1; padding: 10px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; font-weight: bold; text-align: center; transition: 0.3s; background: rgba(52, 152, 219, 0.2); color: #3498db; border: 1px solid #3498db; }
+        .btn:hover { background: #3498db; color: white; }
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+    <div class="container">
+        <div class="header-section">
+            <div class="breadcrumb"><a href="/shuls">Areas</a> / Westmount</div>
+            <h1>Westmount</h1>
+            <p>Community Minyanim and Synagogues</p>
+        </div>
+        <div class="listings-grid">
+            <div class="listing-card">
+                <div>
+                    <div class="shul-name">Chabad of Westmount</div>
+                    <div class="shul-address"><i class="fas fa-map-marker-alt"></i> 1 Westmount Square</div>
+                </div>
+                <a href="https://www.google.com/maps/search/?api=1&query=Chabad+of+Westmount+1+Westmount+Square" target="_blank" class="btn">Directions</a>
+            </div>
+            <div class="listing-card">
+                <div>
+                    <div class="shul-name">Shaar Hashomayim</div>
+                    <div class="shul-address"><i class="fas fa-map-marker-alt"></i> 450 Kensington Ave</div>
+                </div>
+                <a href="https://www.google.com/maps/search/?api=1&query=Shaar+Hashomayim+450+Kensington+Ave" target="_blank" class="btn">Directions</a>
+            </div>
+        </div>
+    </div>
+    <div id="footer"></div>
+    <script>
+        fetch('/header.html').then(r => r.text()).then(d => document.getElementById('header').innerHTML = d);
+        fetch('/footer.html').then(r => r.text()).then(d => document.getElementById('footer').innerHTML = d);
+    </script>
+</body>
+</html>
