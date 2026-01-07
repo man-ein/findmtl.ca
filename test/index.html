@@ -1,97 +1,111 @@
-<div id="mc_embed_shell" style="margin-top: 100px; width: 100%; display: flex; justify-content: center;">
-    <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
-    
-    <style type="text/css">
-        #mc_embed_signup {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            clear: left;
-            font: 14px Helvetica, Arial, sans-serif;
-            max-width: 500px;
-            width: 90%;
-            border-radius: 15px;
-            padding: 20px;
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Resources • FindMTL.ca</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            color: #ffffff;
+            /* Using your specific background and overlay */
+            background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('https://media.istockphoto.com/id/478489838/photo/panoramic-picture-of-montreal-cityscape-at-sunset.jpg?s=612x612&w=0&k=20&c=78iWttuKv4r2Qz7U4QhLKnYg3Uy4zUumzNkHTq14DWo=') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
         }
-        #mc_embed_signup h2 {
-            color: #fff;
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-        #mc_embed_signup .indicates-required {
-            color: #ddd;
-        }
-        #mc_embed_signup label {
-            color: #fff !important;
-            font-weight: bold;
-        }
-        #mc_embed_signup input.email, #mc_embed_signup input.text {
-            border-radius: 5px;
-            border: none;
-            padding: 10px;
+
+        /* --- CONTAINER --- */
+        .container {
+            max-width: 1100px;
             width: 100%;
-            margin-bottom: 10px;
+            padding: 160px 20px 60px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
         }
-        #mc_embed_signup .button {
-            background-color: #e63946 !important; /* A vibrant MTL red */
-            height: 45px;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.3s;
+
+        .header-section { text-align: center; margin-bottom: 40px; }
+        h1 { font-size: 2.8rem; margin-bottom: 10px; font-weight: 300; }
+        .breadcrumb { font-size: 1rem; opacity: 0.7; margin-bottom: 20px; }
+        .breadcrumb a { color: #3498db; text-decoration: none; }
+
+        /* --- GOOGLE SHEETS EMBED BOX --- */
+        .sheet-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            padding: 15px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 100%;
+            height: 700px; /* Adjust height as needed */
+            box-sizing: border-box;
+            overflow: hidden;
         }
-        #mc_embed_signup .button:hover {
-            background-color: #ff4d5a !important;
+
+        .sheet-card iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
         }
-        /* Fix for Mailchimp's default bottom padding */
-        #mc_embed_signup_scroll {
-            padding-bottom: 0;
+
+        @media (max-width: 768px) {
+            .container { padding-top: 140px; }
+            h1 { font-size: 2rem; }
+            .sheet-card { height: 500px; } /* Slightly shorter on mobile */
         }
     </style>
+</head>
+<body>
+    <div id="header"></div>
 
-    <div id="mc_embed_signup">
-        <form action="https://mendye.us5.list-manage.com/subscribe/post?u=f20d6385f7bb834896f8fa2d6&amp;id=edf834306d&amp;f_id=00728ae9f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
-            <div id="mc_embed_signup_scroll">
-                <h2>Join the waitlist</h2>
-                <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
-                
-                <div class="mc-field-group">
-                    <label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label>
-                    <input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required="" value="" placeholder="email@example.com">
-                </div>
+    <div class="container">
+        <div class="header-section">
+            <div class="breadcrumb"><a href="/">Home</a> / Resources</div>
+            <h1>Montreal Community Resources</h1>
+            <p>Live updated directory and information</p>
+        </div>
 
-                <div class="mc-field-group">
-                    <label for="mce-FNAME">Full Name <span class="asterisk">*</span></label>
-                    <input type="text" name="FNAME" class="required text" id="mce-FNAME" required="" value="" placeholder="Your Name">
-                </div>
-
-                <div id="mce-responses" class="clear foot">
-                    <div class="response" id="mce-error-response" style="display: none;"></div>
-                    <div class="response" id="mce-success-response" style="display: none;"></div>
-                </div>
-
-                <div aria-hidden="true" style="position: absolute; left: -5000px;">
-                    <input type="text" name="b_f20d6385f7bb834896f8fa2d6_edf834306d" tabindex="-1" value="">
-                </div>
-
-                <div class="optionalParent">
-                    <div class="clear foot" style="display: flex; flex-direction: column; align-items: center;">
-                        <input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Keep me updated">
-                        <p style="margin: 10px 0 0 0;"><a href="http://eepurl.com/jvPwkk" title="Mailchimp"><img src="https://digitalasset.intuit.com/render/content/dam/intuit/mc-fe/en_us/images/intuit-mc-rewards-text-dark.svg" alt="Intuit Mailchimp" style="width: 150px; filter: brightness(0) invert(1);"></a></p>
-                    </div>
-                </div>
-            </div>
-        </form>
+        <div class="sheet-card">
+            <iframe src="https://docs.google.com/spreadsheets/d/1urR7siCcocjH8WOs1Y7d4oxngtCfq6OAC0Jai4FnQWc/htmlembed?widget=true&headers=false"></iframe>
+        </div>
     </div>
-    
-    <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
-    <script type="text/javascript">
-        (function($) {
-            window.fnames = new Array(); window.ftypes = new Array();
-            fnames[0]='EMAIL';ftypes[0]='email';
-            fnames[1]='FNAME';ftypes[1]='text';
-        }(jQuery));
-        var $mcj = jQuery.noConflict(true);
+
+    <div id="footer"></div>
+
+    <script>
+        // Load header/footer components using your existing logic
+        fetch('/header.html').then(r => r.text()).then(d => document.getElementById('header').innerHTML = d);
+        fetch('/footer.html').then(r => r.text()).then(d => document.getElementById('footer').innerHTML = d);
+
+        // Required logic for mobile menu toggle (from your reference)
+        function toggleMenu() {
+            const hamburger = document.querySelector('.hamburger');
+            const menu = document.getElementById('navMenu');
+            if (hamburger && menu) {
+                hamburger.classList.toggle('active');
+                menu.classList.toggle('active');
+            }
+        }
+
+        window.onclick = function(event) {
+            if (!event.target.closest('.nav-wrapper')) {
+                const hamburger = document.querySelector('.hamburger');
+                const menu = document.getElementById('navMenu');
+                if (hamburger && hamburger.classList.contains('active')) {
+                    hamburger.classList.remove('active');
+                    menu.classList.remove('active');
+                }
+            }
+        }
     </script>
-</div>
+</body>
+</html>
