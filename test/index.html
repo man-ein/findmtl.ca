@@ -12,7 +12,6 @@
             height: 100%;
             font-family: 'Helvetica', 'Arial', sans-serif;
             color: #ffffff;
-            /* EXACT BACKGROUND FROM TEMPLATE */
             background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('https://media.istockphoto.com/id/478489838/photo/panoramic-picture-of-montreal-cityscape-at-sunset.jpg?s=612x612&w=0&k=20&c=78iWttuKv4r2Qz7U4QhLKnYg3Uy4zUumzNkHTq14DWo=') no-repeat center center fixed;
             background-size: cover;
             display: flex;
@@ -21,7 +20,7 @@
             min-height: 100vh;
         }
 
-        /* --- HEADER STYLES (MATCHING TEMPLATE) --- */
+        /* --- ALL STYLES KEPT EXACTLY FROM YOUR SAMPLE --- */
         header {
             position: fixed;
             top: 0;
@@ -32,8 +31,6 @@
             padding: 15px 0;
             z-index: 1000;
         }
-
-        /* --- CONTAINER --- */
         .container {
             max-width: 1100px;
             width: 100%;
@@ -43,39 +40,28 @@
             flex-direction: column;
             box-sizing: border-box;
         }
-
         .header-section { text-align: center; margin-bottom: 40px; }
         h1 { font-size: 2.8rem; margin-bottom: 10px; font-weight: 300; }
         .breadcrumb { font-size: 1rem; opacity: 0.7; margin-bottom: 20px; }
         .breadcrumb a { color: #3498db; text-decoration: none; }
 
-        /* --- SHEET CARD (MATCHING LISTING-CARD GLASSMORPHISM) --- */
-        .sheet-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
-            padding: 10px; /* Slight padding inside the glass card */
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            width: 100%;
-            height: 750px;
-            box-sizing: border-box;
-            overflow: hidden;
-            transition: all 0.3s ease;
+        /* --- THE SHEET CONTAINER (Using your exact listing-card class) --- */
+        .listing-card.sheet-mode {
+            padding: 10px;
+            height: 700px;
+            cursor: default;
         }
-
-        .sheet-card:hover {
-            border-color: #3498db; /* Blue border glow on hover matching shul cards */
+        .listing-card.sheet-mode:hover {
+            transform: none; /* Keep it steady since it's an interactive sheet */
         }
-
-        .sheet-card iframe {
+        iframe {
             width: 100%;
             height: 100%;
             border: none;
             border-radius: 10px;
-            background: #ffffff; /* Contrast for the sheet data */
+            background: white;
         }
 
-        /* --- FOOTER (MATCHING TEMPLATE) --- */
         footer {
             width: 100%;
             padding: 40px 20px;
@@ -92,7 +78,7 @@
         @media (max-width: 768px) {
             .container { padding-top: 140px; }
             h1 { font-size: 2rem; }
-            .sheet-card { height: 500px; }
+            .listing-card.sheet-mode { height: 500px; }
         }
     </style>
 </head>
@@ -102,11 +88,11 @@
     <div class="container">
         <div class="header-section">
             <div class="breadcrumb"><a href="/">Home</a> / Resources</div>
-            <h1>Community Resources</h1>
+            <h1>Montreal Community Resources</h1>
             <p>Live updated directory and information</p>
         </div>
 
-        <div class="sheet-card">
+        <div class="listing-card sheet-mode">
             <iframe src="https://docs.google.com/spreadsheets/d/1urR7siCcocjH8WOs1Y7d4oxngtCfq6OAC0Jai4FnQWc/htmlembed?widget=true&amp;headers=false"></iframe>
         </div>
     </div>
@@ -114,11 +100,10 @@
     <div id="footer"></div>
 
     <script>
-        // Loading components from main directory (../)
+        // Load header/footer components - adjusted with ../ for sub-directory
         fetch('../header.html').then(r => r.text()).then(d => document.getElementById('header').innerHTML = d);
         fetch('../footer.html').then(r => r.text()).then(d => document.getElementById('footer').innerHTML = d);
 
-        // Required logic for mobile menu toggle
         function toggleMenu() {
             const hamburger = document.querySelector('.hamburger');
             const menu = document.getElementById('navMenu');
@@ -128,7 +113,6 @@
             }
         }
 
-        // Close menu logic
         window.onclick = function(event) {
             if (!event.target.closest('.nav-wrapper')) {
                 const hamburger = document.querySelector('.hamburger');
