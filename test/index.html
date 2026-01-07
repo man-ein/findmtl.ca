@@ -12,6 +12,7 @@
             height: 100%;
             font-family: 'Helvetica', 'Arial', sans-serif;
             color: #ffffff;
+            /* Using your specific background and overlay */
             background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('https://media.istockphoto.com/id/478489838/photo/panoramic-picture-of-montreal-cityscape-at-sunset.jpg?s=612x612&w=0&k=20&c=78iWttuKv4r2Qz7U4QhLKnYg3Uy4zUumzNkHTq14DWo=') no-repeat center center fixed;
             background-size: cover;
             display: flex;
@@ -36,7 +37,7 @@
         .breadcrumb { font-size: 1rem; opacity: 0.7; margin-bottom: 20px; }
         .breadcrumb a { color: #3498db; text-decoration: none; }
 
-        /* --- GOOGLE SHEETS EMBED BOX --- */
+        /* --- GOOGLE SHEETS EMBED BOX (Matching your Listing Card style) --- */
         .sheet-card {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(12px);
@@ -44,7 +45,7 @@
             border-radius: 15px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             width: 100%;
-            height: 700px; 
+            height: 750px; /* Adjusted for better visibility */
             box-sizing: border-box;
             overflow: hidden;
         }
@@ -54,13 +55,13 @@
             height: 100%;
             border: none;
             border-radius: 10px;
-            background: white; /* Ensures sheet is readable */
+            background: white; /* Contrast for the sheet data */
         }
 
         @media (max-width: 768px) {
             .container { padding-top: 140px; }
             h1 { font-size: 2rem; }
-            .sheet-card { height: 550px; } 
+            .sheet-card { height: 500px; } 
         }
     </style>
 </head>
@@ -82,24 +83,16 @@
     <div id="footer"></div>
 
     <script>
-        /**
-         * IMPORTANT: Added "../" to the paths below. 
-         * This tells the browser to look in the main directory 
-         * for the header and footer files.
-         */
+        // Load header/footer components using relative paths to the main directory
         fetch('../header.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('header').innerHTML = data;
-            });
-
+            .then(r => r.text())
+            .then(d => document.getElementById('header').innerHTML = d);
+            
         fetch('../footer.html')
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('footer').innerHTML = data;
-            });
+            .then(r => r.text())
+            .then(d => document.getElementById('footer').innerHTML = d);
 
-        // Mobile menu toggle logic
+        // Required logic for mobile menu toggle (from your reference)
         function toggleMenu() {
             const hamburger = document.querySelector('.hamburger');
             const menu = document.getElementById('navMenu');
@@ -109,7 +102,6 @@
             }
         }
 
-        // Close menu when clicking outside
         window.onclick = function(event) {
             if (!event.target.closest('.nav-wrapper')) {
                 const hamburger = document.querySelector('.hamburger');
