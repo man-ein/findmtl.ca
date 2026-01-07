@@ -20,7 +20,21 @@
             text-align: center;
             min-height: 100vh;
         }
-        /* Fixed Header */
+
+        /* --- ZOOMING ANIMATION --- */
+        @keyframes softZoom {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); } 
+            100% { transform: scale(1); }
+        }
+
+        .zoom-text {
+            display: inline-block; 
+            width: 100%;
+            animation: softZoom 2.5s infinite ease-in-out;
+        }
+
+        /* Fixed Header Styles */
         header {
             position: fixed;
             top: 0;
@@ -39,6 +53,53 @@
             justify-content: space-between;
             align-items: center;
         }
+        .logo { font-size: 1.8rem; font-weight: bold; color: white; text-decoration: none; }
+        .nav-wrapper { display: flex; align-items: center; gap: 20px; position: relative; }
+        .desktop-nav { display: flex; gap: 25px; }
+        .desktop-nav a { color: white; text-decoration: none; font-size: 1.1rem; font-weight: 500; transition: color 0.3s; }
+        .desktop-nav a:hover { color: #3498db; }
+
+        /* Hamburger & Floating Menu */
+        .hamburger { cursor: pointer; padding: 5px; display: block; }
+        .hamburger span {
+            display: block; width: 30px; height: 3px; background: white; margin: 6px 0;
+            transition: 0.4s; border-radius: 2px;
+        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
+
+        .nav-menu {
+            position: absolute; z-index: 1100; top: 60px; right: 0;
+            background: rgba(4, 5, 5, 0.98); border-radius: 15px; padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7); display: none;
+            flex-direction: column; gap: 8px; min-width: 240px; text-align: right;
+        }
+        .nav-menu.active { display: flex; }
+        .nav-menu a {
+            color: white; text-decoration: none; font-size: 1.1rem;
+            font-weight: 500; padding: 10px 16px; border-radius: 10px; transition: background 0.3s;
+        }
+        .nav-menu a:hover { background: rgba(52, 152, 219, 0.4); }
+
+        /* --- SHEET EMBED STYLING (Adapted from Form Wrapper) --- */
+        .form-wrapper {
+            width: 100%;
+            max-width: 1100px; /* Wider for the spreadsheet */
+            margin: 40px auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 10px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        iframe {
+            width: 100%;
+            height: 75vh; /* Responsive height */
+            border: none;
+            border-radius: 10px;
+            background-color: white;
+        }
 
         /* Container & Spacing */
         .container {
@@ -51,51 +112,35 @@
             align-items: center;
             position: relative;
             box-sizing: border-box;
-            font-size: 0.9rem;
         }
 
-        h1 { font-size: 3rem; margin-bottom: 20px; letter-spacing: 2px; font-weight: 300; }
-        .subtitle { font-size: 1.5rem; margin-bottom: 30px; font-style: italic; opacity: 0.9; }
+        h1 { font-size: 4rem; margin-bottom: 20px; letter-spacing: 2px; font-weight: 300; }
+        .subtitle { font-size: 1.8rem; margin-bottom: 15px; font-style: italic; opacity: 0.9; }
+        p { font-size: 1.3rem; line-height: 1.6; margin-top: 20px; margin-bottom: 50px; opacity: 0.9; max-width: 90%; padding: 0 10px; }
 
-        /* Embedded Sheet Card */
-        .sheet-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
-            padding: 10px;
-            border-radius: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            width: 100%;
-            max-width: 1100px;
-            height: 75vh;
-            min-height: 500px;
-            box-sizing: border-box;
-        }
-        
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            border-radius: 10px;
-            background: white;
-        }
-
-        /* Footer */
+        /* Footer Styles */
         footer {
-            width: 100%;
-            padding: 40px 20px;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
+            width: 100%; padding: 40px 20px; background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px); box-sizing: border-box; display: flex;
+            flex-direction: column; align-items: center; gap: 20px;
         }
+        .footer-links {
+            display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;
+        }
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 0.95rem; transition: color 0.3s;
+        }
+        .footer-links a:hover { color: white; }
+        .copyright { font-size: 0.85rem; opacity: 0.7; }
 
+        /* Mobile-specific fixes */
         @media (max-width: 768px) {
-            .container { padding-top: 140px; }
-            h1 { font-size: 2.4rem; }
-            .sheet-card { height: 60vh; }
+            .desktop-nav { display: none; }
+            header { padding: 12px 0; }
+            .container { padding-top: 180px; justify-content: flex-start; }
+            h1 { font-size: 2.8rem; letter-spacing: 1px; }
+            .subtitle { font-size: 1.4rem; }
+            iframe { height: 500px; }
         }
     </style>
 </head>
@@ -104,18 +149,26 @@
 
     <div class="container">
         <h1>Community Resources</h1>
-        <div class="subtitle">Find everything you need in MTL</div>
         
-        <div class="sheet-card">
-            <iframe src="https://docs.google.com/spreadsheets/d/1urR7siCcocjH8WOs1Y7d4oxngtCfq6OAC0Jai4FnQWc/htmlembed?widget=true&amp;headers=false"></iframe>
+        <div class="subtitle zoom-text">A live directory of Montreal resources,</div>
+        <div class="subtitle zoom-text">updated in real-time by the community.</div>
+
+        <div class="form-wrapper">
+            <iframe 
+                src="https://docs.google.com/spreadsheets/d/1urR7siCcocjH8WOs1Y7d4oxngtCfq6OAC0Jai4FnQWc/htmlembed?widget=true&amp;headers=false" 
+                frameborder="0">
+                Loading…
+            </iframe>
         </div>
+
+        <p>Information is power. Thank you for using and contributing to the FindMTL directory!</p>
     </div>
 
     <div id="footer"></div>
 
     <script>
-        // Exact fetch logic from your sample
-        fetch('../header.html')
+        // Use the base fetch logic
+        fetch('/header.html')
             .then(response => {
                 if (!response.ok) throw new Error('Header not found');
                 return response.text();
@@ -123,7 +176,7 @@
             .then(data => document.getElementById('header').innerHTML = data)
             .catch(err => console.error(err));
 
-        fetch('../footer.html')
+        fetch('/footer.html')
             .then(response => {
                 if (!response.ok) throw new Error('Footer not found');
                 return response.text();
