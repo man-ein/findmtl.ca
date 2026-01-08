@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Outremont Resources • FindMTL.ca</title>
+    <title>Outremont Minyanim • FindMTL.ca</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body, html {
@@ -19,7 +19,7 @@
 
         .container {
             max-width: 1100px; width: 100%;
-            margin: 0 auto; padding: 140px 20px 60px; /* Adjusted padding for smaller feel */
+            margin: 0 auto; padding: 140px 20px 60px; 
             flex-grow: 1;
             box-sizing: border-box;
         }
@@ -30,19 +30,19 @@
         /* --- SMALLER GRID & CARDS --- */
         .listings-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Smaller min-width */
-            gap: 15px; /* Tighter gap */
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
+            gap: 15px; 
             width: 100%;
         }
 
         .listing-card {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(15px);
-            padding: 15px; /* Reduced padding for smaller boxes */
+            padding: 15px; 
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             text-align: center;
-            min-height: 90px; /* Reduced min-height */
+            min-height: 90px; 
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -55,17 +55,15 @@
             border-color: #3498db;
         }
 
-        /* Column B Style (Top) */
         .cell-value-B {
-            font-size: 1.1rem; /* Slightly smaller font */
+            font-size: 1.1rem; 
             font-weight: bold;
             color: #3498db; 
             margin-bottom: 4px;
         }
 
-        /* Column A Style (Bottom) */
         .cell-value-A {
-            font-size: 0.85rem; /* Smaller sub-text */
+            font-size: 0.85rem; 
             font-weight: normal;
             color: #ffffff;
             opacity: 0.85;
@@ -77,7 +75,7 @@
         @media (max-width: 768px) {
             .container { padding-top: 110px; }
             h1 { font-size: 1.8rem; }
-            .listings-grid { grid-template-columns: repeat(2, 1fr); } /* 2 per row on mobile */
+            .listings-grid { grid-template-columns: repeat(2, 1fr); } 
         }
     </style>
 </head>
@@ -87,8 +85,8 @@
 
     <div class="container">
         <div class="header-section">
-            <h1>Outremont Resources</h1>
-            <p>Live community data from Google Sheets</p>
+            <h1>Outremont Minyanim</h1>
+            <p>Live Outremont Minyanim list</p>
         </div>
 
         <div class="listings-grid" id="grid-container">
@@ -98,7 +96,7 @@
     <div id="footer"></div>
 
     <script>
-        // --- LOAD EXTERNAL HEADER/FOOTER ---
+        // --- LOAD EXTERNAL HEADER/FOOTER (YOUR ORIGINAL LOGIC) ---
         fetch('/header.html')
             .then(response => response.text())
             .then(data => document.getElementById('header').innerHTML = data)
@@ -113,7 +111,7 @@
         const grid = document.getElementById('grid-container');
         const bridgeURL = "https://script.google.com/macros/s/AKfycbwFt5Ha9SRY_yBaV229LPy_V6bI-p1cwBwEyKBoNWJ-iLCDoHxS1mzWr3I1F_-OftT4/exec";
 
-        // 1. Create placeholder boxes (Removed the "Ref" label line)
+        // 1. Create boxes (Small, No Ref label)
         for (let i = 2; i <= 51; i++) {
             const card = document.createElement('div');
             card.className = 'listing-card';
@@ -135,14 +133,13 @@
                     const elementB = document.getElementById(`cell-B${rowNum}`);
                     const card = document.getElementById(`card-${rowNum}`);
 
-                    const valA = row[0]; // Column A
-                    const valB = row[1]; // Column B
+                    const valA = row[0]; 
+                    const valB = row[1]; 
 
                     if (elementA && elementB) {
                         elementA.innerText = valA || "";
                         elementB.innerText = valB || "---";
                         
-                        // Hide card if empty
                         if ((!valA || valA.trim() === "") && (!valB || valB.trim() === "---" || valB.trim() === "")) {
                             card.style.display = 'none';
                         }
