@@ -2,198 +2,101 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Resources • FindMTL.ca</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outremont Resources • FindMTL.ca</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
+            margin: 0; padding: 0;
             font-family: 'Helvetica', 'Arial', sans-serif;
             color: #ffffff;
-            background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('https://media.istockphoto.com/id/478489838/photo/panoramic-picture-of-montreal-cityscape-at-sunset.jpg?s=612x612&w=0&k=20&c=78iWttuKv4r2Qz7U4QhLKnYg3Uy4zUumzNkHTq14DWo=') no-repeat center center fixed;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://media.istockphoto.com/id/478489838/photo/panoramic-picture-of-montreal-cityscape-at-sunset.jpg?s=612x612&w=0&k=20&c=78iWttuKv4r2Qz7U4QhLKnYg3Uy4zUumzNkHTq14DWo=') no-repeat center center fixed;
             background-size: cover;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
             min-height: 100vh;
         }
 
-        /* --- ZOOMING ANIMATION --- */
-        @keyframes softZoom {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); } 
-            100% { transform: scale(1); }
-        }
-
-        .zoom-text {
-            display: inline-block; 
-            width: 100%;
-            animation: softZoom 2.5s infinite ease-in-out;
-        }
-
-        /* Fixed Header Styles */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(10px);
-            padding: 15px 0;
-            z-index: 1000;
-        }
-        .header-content {
-            max-width: 90%;
-            width: 100%;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo { font-size: 1.8rem; font-weight: bold; color: white; text-decoration: none; }
-        .nav-wrapper { display: flex; align-items: center; gap: 20px; position: relative; }
-        .desktop-nav { display: flex; gap: 25px; }
-        .desktop-nav a { color: white; text-decoration: none; font-size: 1.1rem; font-weight: 500; transition: color 0.3s; }
-        .desktop-nav a:hover { color: #3498db; }
-
-        .hamburger { cursor: pointer; padding: 5px; display: block; }
-        .hamburger span {
-            display: block; width: 30px; height: 3px; background: white; margin: 6px 0;
-            transition: 0.4s; border-radius: 2px;
-        }
-        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
-        .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
-
-        .nav-menu {
-            position: absolute; z-index: 1100; top: 60px; right: 0;
-            background: rgba(4, 5, 5, 0.98); border-radius: 15px; padding: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7); display: none;
-            flex-direction: column; gap: 8px; min-width: 240px; text-align: right;
-        }
-        .nav-menu.active { display: flex; }
-        .nav-menu a {
-            color: white; text-decoration: none; font-size: 1.1rem;
-            font-weight: 500; padding: 10px 16px; border-radius: 10px; transition: background 0.3s;
-        }
-
-        /* --- SHEET EMBED STYLING --- */
-        .form-wrapper {
-            width: 100%;
-            max-width: 1100px;
-            margin: 40px auto;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 10px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            /* Recommended: Helps the browser prioritize the rendering of the card */
-            contain: content; 
-        }
-
-        iframe {
-            width: 100%;
-            height: 75vh;
-            border: none;
-            border-radius: 10px;
-            background-color: white;
-            /* RECOMMENDED CODE FOR SMOOTHNESS: Forces GPU acceleration to stop freezing */
-            transform: translateZ(0);
-            will-change: transform;
-        }
-
         .container {
-            max-width: 90%;
-            width: 100%;
-            padding: 160px 20px 60px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
+            max-width: 1100px; width: 100%;
+            margin: 0 auto; padding: 160px 20px 60px;
             box-sizing: border-box;
         }
 
-        h1 { font-size: 4rem; margin-bottom: 20px; letter-spacing: 2px; font-weight: 300; }
-        .subtitle { font-size: 1.8rem; margin-bottom: 15px; font-style: italic; opacity: 0.9; }
-        p { font-size: 1.3rem; line-height: 1.6; margin-top: 20px; margin-bottom: 50px; opacity: 0.9; max-width: 90%; padding: 0 10px; }
-
-        footer {
-            width: 100%; padding: 40px 20px; background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px); box-sizing: border-box; display: flex;
-            flex-direction: column; align-items: center; gap: 20px;
+        .header-section { text-align: center; margin-bottom: 40px; }
+        
+        .listings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
         }
-        .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-        .footer-links a { color: rgba(255, 255, 255, 0.8); text-decoration: none; font-size: 0.95rem; }
-        .copyright { font-size: 0.85rem; opacity: 0.7; }
 
-        @media (max-width: 768px) {
-            .desktop-nav { display: none; }
-            header { padding: 12px 0; }
-            .container { padding-top: 180px; justify-content: flex-start; }
-            h1 { font-size: 2.8rem; letter-spacing: 1px; }
-            .subtitle { font-size: 1.4rem; }
-            iframe { height: 500px; }
+        .listing-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            padding: 20px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
+
+        .cell-label { font-size: 0.7rem; opacity: 0.5; margin-bottom: 10px; text-transform: uppercase; }
+        
+        .cell-value {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #3498db; 
+        }
+
+        .loading-text { font-size: 0.8rem; opacity: 0.5; font-style: italic; }
     </style>
 </head>
 <body>
-    <div id="header"></div>
-
     <div class="container">
-        <h1>Community Resources</h1>
-        
-        <div class="subtitle zoom-text">A live directory of Montreal resources,</div>
-        <div class="subtitle zoom-text">updated in real-time by the community.</div>
-
-        <div class="form-wrapper">
-            <iframe 
-                src="https://docs.google.com/document/d/1mMH-vwsFVwQdSDYmH3-1eyx-ynK5ZDIy8NdJbfgyq70/preview?rm=minimal" 
-                width="100%" 
-                height="600px" 
-                frameborder="0">
-                Loading…
-            </iframe>
+        <div class="header-section">
+            <h1>Outremont Resources</h1>
+            <p>Live community data from Google Sheets</p>
         </div>
 
-        <p>Information is power. Thank you for using and contributing to the FindMTL directory!</p>
+        <div class="listings-grid" id="grid-container">
+            </div>
     </div>
 
-    <div id="footer"></div>
-
     <script>
-        fetch('/header.html')
-            .then(response => response.text())
-            .then(data => document.getElementById('header').innerHTML = data)
-            .catch(err => console.error(err));
+    const grid = document.getElementById('grid-container');
+    // Paste the /exec link you just copied below
+    const bridgeURL = "https://script.google.com/macros/s/AKfycbwFt5Ha9SRY_yBaV229LPy_V6bI-p1cwBwEyKBoNWJ-iLCDoHxS1mzWr3I1F_-OftT4/exec";
 
-        fetch('/footer.html')
-            .then(response => response.text())
-            .then(data => document.getElementById('footer').innerHTML = data)
-            .catch(err => console.error(err));
+    // 1. Create 50 boxes immediately
+    for (let i = 2; i <= 51; i++) {
+        const card = document.createElement('div');
+        card.className = 'listing-card';
+        card.innerHTML = `
+            <div class="cell-label">Ref B${i}</div>
+            <div class="cell-value" id="cell-B${i}">Loading...</div>
+        `;
+        grid.appendChild(card);
+    }
 
-        function toggleMenu() {
-            const hamburger = document.querySelector('.hamburger');
-            const menu = document.getElementById('navMenu');
-            if (hamburger && menu) {
-                hamburger.classList.toggle('active');
-                menu.classList.toggle('active');
-            }
-        }
-
-        window.onclick = function(event) {
-            if (!event.target.closest('.nav-wrapper')) {
-                const hamburger = document.querySelector('.hamburger');
-                const menu = document.getElementById('navMenu');
-                if (hamburger && hamburger.classList.contains('active') && menu) {
-                    hamburger.classList.remove('active');
-                    menu.classList.remove('active');
+    // 2. Fetch all data in one request via the bridge
+    fetch(bridgeURL)
+        .then(response => response.json())
+        .then(dataArray => {
+            dataArray.forEach((val, index) => {
+                const cellNum = index + 2;
+                const element = document.getElementById(`cell-B${cellNum}`);
+                if (element) {
+                    element.innerText = val || "---";
                 }
-            }
-        }
-    </script>
+            });
+        })
+        .catch(() => {
+            document.querySelectorAll('.cell-value').forEach(el => {
+                el.innerText = "Connection Error";
+            });
+        });
+</script>
 </body>
 </html>
