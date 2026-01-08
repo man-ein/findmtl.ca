@@ -3,68 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Coming Soon • FindMTL.ca</title>
+    <title>Outremont Maariv • FindMTL.ca</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* --- GLOBAL STYLES --- */
         body, html {
             margin: 0;
             padding: 0;
             height: 100%;
             font-family: 'Helvetica', 'Arial', sans-serif;
             color: #ffffff;
-            background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url('https://media.istockphoto.com/id/478489838/photo/panoramic-picture-of-montreal-cityscape-at-sunset.jpg?s=612x612&w=0&k=20&c=78iWttuKv4r2Qz7U4QhLKnYg3Uy4zUumzNkHTq14DWo=') no-repeat center center fixed;
+            background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('https://media.istockphoto.com/id/478489838/photo/panoramic-picture-of-montreal-cityscape-at-sunset.jpg?s=612x612&w=0&k=20&c=78iWttuKv4r2Qz7U4QhLKnYg3Uy4zUumzNkHTq14DWo=') no-repeat center center fixed;
             background-size: cover;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            text-align: center;
             min-height: 100vh;
         }
 
-        /* --- ZOOMING ANIMATION --- */
-        @keyframes softZoom {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); } 
-            100% { transform: scale(1); }
-        }
-
-        .zoom-text {
-            display: inline-block; 
-            width: 100%;
-            animation: softZoom 2.5s infinite ease-in-out;
-        }
-        /* Footer Spacing Fixed */
-        footer {
-            width: 100%;
-            padding: 40px 20px;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-        }
-        .footer-links {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-        }
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            font-size: 0.95rem;
-            transition: color 0.3s;
-        }
-        .footer-links a:hover { color: white; }
-        .copyright {
-            font-size: 0.85rem;
-            opacity: 0.7;
-        }
-
-
-        /* Fixed Header Styles (from your base) */
+        /* --- HEADER STYLES --- */
         header {
             position: fixed;
             top: 0;
@@ -85,15 +41,11 @@
         }
         .logo { font-size: 1.8rem; font-weight: bold; color: white; text-decoration: none; }
         .nav-wrapper { display: flex; align-items: center; gap: 20px; position: relative; }
-        .desktop-nav { display: flex; gap: 25px; }
-        .desktop-nav a { color: white; text-decoration: none; font-size: 1.1rem; font-weight: 500; transition: color 0.3s; }
-        .desktop-nav a:hover { color: #3498db; }
-
-        /* Hamburger & Floating Menu */
+        
         .hamburger { cursor: pointer; padding: 5px; display: block; }
-        .hamburger span {
-            display: block; width: 30px; height: 3px; background: white; margin: 6px 0;
-            transition: 0.4s; border-radius: 2px;
+        .hamburger span { 
+            display: block; width: 30px; height: 3px; background: white; 
+            margin: 6px 0; transition: 0.4s; border-radius: 2px; 
         }
         .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
         .hamburger.active span:nth-child(2) { opacity: 0; }
@@ -106,127 +58,139 @@
             flex-direction: column; gap: 8px; min-width: 240px; text-align: right;
         }
         .nav-menu.active { display: flex; }
-        .nav-menu a {
-            color: white; text-decoration: none; font-size: 1.1rem;
-            font-weight: 500; padding: 10px 16px; border-radius: 10px; transition: background 0.3s;
+        .nav-menu a { 
+            color: white; text-decoration: none; font-size: 1.1rem; padding: 10px 16px; 
+            border-radius: 10px; transition: background 0.3s; 
         }
         .nav-menu a:hover { background: rgba(52, 152, 219, 0.4); }
 
-        /* --- FORM EMBED STYLING --- */
-        .form-wrapper {
-            width: 100%;
-            max-width: 700px;
-            margin: 40px auto;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 10px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        iframe {
-            width: 100%;
-            border: none;
-            border-radius: 10px;
-            background-color: white;
-        }
-
-        /* Container & Spacing */
+        /* --- CONTAINER & GRID --- */
         .container {
-            max-width: 90%;
+            max-width: 1100px;
             width: 100%;
+            margin: 0 auto;
             padding: 160px 20px 60px;
             flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
             box-sizing: border-box;
         }
 
-        h1 { font-size: 4rem; margin-bottom: 20px; letter-spacing: 2px; font-weight: 300; }
-        .subtitle { font-size: 1.8rem; margin-bottom: 15px; font-style: italic; opacity: 0.9; }
-        p { font-size: 1.3rem; line-height: 1.6; margin-top: 20px; margin-bottom: 50px; opacity: 0.9; max-width: 90%; padding: 0 10px; }
+        .header-section { text-align: center; margin-bottom: 30px; }
+        h1 { font-size: 2.4rem; margin-bottom: 8px; font-weight: 300; }
+        .header-section p { font-size: 1.1rem; opacity: 0.8; }
 
-        /* Footer (from your base) */
-        footer {
-            width: 100%; padding: 40px 20px; background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px); box-sizing: border-box; display: flex;
-            flex-direction: column; align-items: center; gap: 20px;
+        .listings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            width: 100%;
         }
 
-        /* Mobile-specific fixes */
+        .listing-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            min-height: 90px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .cell-value-B { font-size: 1.1rem; font-weight: bold; color: #3498db; margin-bottom: 4px; }
+        .cell-value-A { font-size: 0.85rem; color: #ffffff; opacity: 0.85; }
+        .loading-text { font-size: 0.75rem; opacity: 0.5; font-style: italic; }
+
+        footer {
+            width: 100%;
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            margin-top: auto;
+        }
+
         @media (max-width: 768px) {
-            .desktop-nav { display: none; }
-            header { padding: 12px 0; }
-            .container { padding-top: 180px; justify-content: flex-start; }
-            h1 { font-size: 2.8rem; letter-spacing: 1px; }
-            .subtitle { font-size: 1.4rem; }
-            iframe { height: 700px; }
+            .container { padding-top: 140px; }
+            h1 { font-size: 1.8rem; }
+            .listings-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
 <body>
+
     <div id="header"></div>
 
     <div class="container">
-        <h1>Coming Soon</h1>
-        
-        <div class="subtitle zoom-text">If you have any information you can provide,</div>
-        <div class="subtitle zoom-text">Such as names, addresses, or hours</div>
-        <div class="subtitle zoom-text">Please help the community and fill out the form below</div>
-
-        <div class="form-wrapper">
-            <iframe 
-                src="https://docs.google.com/forms/d/e/1FAIpQLSfSBxHqk6YqcSc5aI9bHk-K_PJ2IL0EyWN2_ygZn-q80rqnRg/viewform?embedded=true" 
-                height="800" 
-                frameborder="0" 
-                marginheight="0" 
-                marginwidth="0">
-                Loading…
-            </iframe>
+        <div class="header-section">
+            <h1>Outremont Maariv</h1>
+            <p>Live Outremont Maariv list</p>
         </div>
-
-        <p>This section is under construction.<br>
-        Thanks so much for submitting the information, you are helping out your community!</p>
+        <div class="listings-grid" id="grid-container"></div>
     </div>
 
     <div id="footer"></div>
 
     <script>
-        // Use your base fetch logic
-        fetch('/header.html')
-            .then(response => {
-                if (!response.ok) throw new Error('Header not found');
-                return response.text();
-            })
-            .then(data => document.getElementById('header').innerHTML = data)
-            .catch(err => console.error(err));
+        // 1. Fetch Header/Footer
+        fetch('/header.html').then(r => r.text()).then(d => {
+            document.getElementById('header').innerHTML = d;
+            setupMobileMenu();
+        });
+        fetch('/footer.html').then(r => r.text()).then(d => document.getElementById('footer').innerHTML = d);
 
-        fetch('/footer.html')
-            .then(response => {
-                if (!response.ok) throw new Error('Footer not found');
-                return response.text();
-            })
-            .then(data => document.getElementById('footer').innerHTML = data)
-            .catch(err => console.error(err));
+        // 2. Fetch Data (Targets the "Maariv" tab)
+        const grid = document.getElementById('grid-container');
+        const bridgeURL = "https://script.google.com/macros/s/AKfycbwFt5Ha9SRY_yBaV229LPy_V6bI-p1cwBwEyKBoNWJ-iLCDoHxS1mzWr3I1F_-OftT4/exec?page=Maariv";
 
-        function toggleMenu() {
-            const hamburger = document.querySelector('.hamburger');
-            const menu = document.getElementById('navMenu');
-            if (hamburger && menu) {
-                hamburger.classList.toggle('active');
-                menu.classList.toggle('active');
-            }
+        // Create 50 cards (Rows 2 to 51)
+        for (let i = 2; i <= 51; i++) {
+            const card = document.createElement('div');
+            card.className = 'listing-card';
+            card.id = `card-${i}`;
+            card.innerHTML = `
+                <div class="cell-value-B" id="cell-B${i}"><span class="loading-text">Loading...</span></div>
+                <div class="cell-value-A" id="cell-A${i}"></div>
+            `;
+            grid.appendChild(card);
         }
 
-        window.onclick = function(event) {
-            if (!event.target.closest('.nav-wrapper')) {
-                const hamburger = document.querySelector('.hamburger');
-                const menu = document.getElementById('navMenu');
-                if (hamburger && hamburger.classList.contains('active')) {
-                    hamburger.classList.remove('active');
-                    menu.classList.remove('active');
-                }
+        fetch(bridgeURL)
+            .then(response => response.json())
+            .then(dataRows => {
+                dataRows.forEach((row, index) => {
+                    const rowNum = index + 2;
+                    const elementA = document.getElementById(`cell-A${rowNum}`);
+                    const elementB = document.getElementById(`cell-B${rowNum}`);
+                    const card = document.getElementById(`card-${rowNum}`);
+                    
+                    const valA = row[0]; // Address/Name
+                    const valB = row[1]; // Time
+
+                    if (elementA && elementB) {
+                        elementA.innerText = valA || "";
+                        elementB.innerText = valB || "";
+                        // Hide card if both cells are empty
+                        if (!valA && !valB) {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            })
+            .catch(err => {
+                document.querySelectorAll('.cell-value-B').forEach(el => el.innerText = "Offline");
+            });
+
+        function setupMobileMenu() {
+            const hamburger = document.querySelector('.hamburger');
+            const menu = document.getElementById('navMenu');
+            if (hamburger) {
+                hamburger.addEventListener('click', () => {
+                    hamburger.classList.toggle('active');
+                    menu.classList.toggle('active');
+                });
             }
         }
     </script>
