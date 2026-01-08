@@ -40,8 +40,9 @@
             align-items: center;
         }
         .logo { font-size: 1.8rem; font-weight: bold; color: white; text-decoration: none; }
-        .nav-wrapper { display: flex; align-items: center; gap: 20px; position: relative; }
         
+        /* Navigation wrapper and mobile styles provided in your template */
+        .nav-wrapper { display: flex; align-items: center; gap: 20px; position: relative; }
         .hamburger { cursor: pointer; padding: 5px; display: block; }
         .hamburger span { 
             display: block; width: 30px; height: 3px; background: white; 
@@ -62,7 +63,6 @@
             color: white; text-decoration: none; font-size: 1.1rem; padding: 10px 16px; 
             border-radius: 10px; transition: background 0.3s; 
         }
-        .nav-menu a:hover { background: rgba(52, 152, 219, 0.4); }
 
         /* --- CONTAINER & GRID --- */
         .container {
@@ -103,6 +103,7 @@
         .cell-value-A { font-size: 0.85rem; color: #ffffff; opacity: 0.85; }
         .loading-text { font-size: 0.75rem; opacity: 0.5; font-style: italic; }
 
+        /* Combined Footer Styles */
         footer {
             width: 100%;
             padding: 40px 20px;
@@ -110,6 +111,7 @@
             backdrop-filter: blur(10px);
             text-align: center;
             margin-top: auto;
+            box-sizing: border-box;
         }
 
         @media (max-width: 768px) {
@@ -134,18 +136,27 @@
     <div id="footer"></div>
 
     <script>
-        // 1. Fetch Header/Footer
-        fetch('/header.html').then(r => r.text()).then(d => {
-            document.getElementById('header').innerHTML = d;
-            setupMobileMenu();
-        });
-        fetch('/footer.html').then(r => r.text()).then(d => document.getElementById('footer').innerHTML = d);
+        // 1. Fetch Header/Footer with improved error handling
+        fetch('/header.html')
+            .then(r => r.text())
+            .then(d => {
+                document.getElementById('header').innerHTML = d;
+                setupMobileMenu();
+            })
+            .catch(err => console.error("Error loading header:", err));
 
-        // 2. Fetch Data (Targets the "Mincha" tab)
+        fetch('/footer.html')
+            .then(r => r.text())
+            .then(d => {
+                document.getElementById('footer').innerHTML = d;
+            })
+            .catch(err => console.error("Error loading footer:", err));
+
+        // 2. Fetch Data from Google Sheets Bridge
         const grid = document.getElementById('grid-container');
         const bridgeURL = "https://script.google.com/macros/s/AKfycbwFt5Ha9SRY_yBaV229LPy_V6bI-p1cwBwEyKBoNWJ-iLCDoHxS1mzWr3I1F_-OftT4/exec?page=Mincha";
 
-        // Create 50 cards (Rows 2 to 51)
+        // Pre-create 50 placeholder cards
         for (let i = 2; i <= 51; i++) {
             const card = document.createElement('div');
             card.className = 'listing-card';
@@ -169,7 +180,7 @@
                     const valA = row[0]; // Address/Name
                     const valB = row[1]; // Time
 
-                    if (elementA && elementB) {
+                    if (elementA && elementB && card) {
                         elementA.innerText = valA || "";
                         elementB.innerText = valB || "";
                         // Hide card if both cells are empty
@@ -180,19 +191,33 @@
                 });
             })
             .catch(err => {
+                console.error("Data fetch error:", err);
                 document.querySelectorAll('.cell-value-B').forEach(el => el.innerText = "Offline");
             });
 
+        // Mobile menu initialization logic
         function setupMobileMenu() {
             const hamburger = document.querySelector('.hamburger');
             const menu = document.getElementById('navMenu');
-            if (hamburger) {
+            if (hamburger && menu) {
                 hamburger.addEventListener('click', () => {
                     hamburger.classList.toggle('active');
                     menu.classList.toggle('active');
                 });
             }
         }
+
+        // Global click handler to close menu when clicking outside
+        window.addEventListener('click', (event) => {
+            if (!event.target.closest('.nav-wrapper')) {
+                const hamburger = document.querySelector('.hamburger');
+                const menu = document.getElementById('navMenu');
+                if (hamburger && hamburger.classList.contains('active')) {
+                    hamburger.classList.remove('active');
+                    menu.classList.remove('active');
+                }
+            }
+        });
     </script>
 </body>
 </html>
