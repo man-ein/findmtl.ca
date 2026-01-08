@@ -20,11 +20,83 @@
             min-height: 100vh;
         }
 
-        /* Container */
+        /* --- FIXED HEADER STYLES --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(15px);
+            padding: 15px 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .header-content {
+            max-width: 1100px;
+            width: 90%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            letter-spacing: 1px;
+        }
+        .nav-wrapper { position: relative; }
+        
+        /* Hamburger Icon */
+        .hamburger {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: white;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+        .hamburger.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+        /* Mobile Dropdown Menu */
+        .nav-menu {
+            position: absolute;
+            top: 50px;
+            right: 0;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 12px;
+            display: none;
+            flex-direction: column;
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .nav-menu.active { display: flex; }
+        .nav-menu a {
+            color: white;
+            text-decoration: none;
+            padding: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            transition: 0.3s;
+        }
+        .nav-menu a:hover { color: #3498db; }
+
+        /* --- MAIN CONTAINER --- */
         .container {
             max-width: 1100px;
             width: 100%;
-            padding: 160px 20px 60px;
+            padding: 140px 20px 60px;
             flex-grow: 1;
             display: flex;
             flex-direction: column;
@@ -33,21 +105,19 @@
             text-align: center;
         }
 
-        h1 { font-size: 3.5rem; margin-bottom: 20px; letter-spacing: 1px; font-weight: 300; }
-        .subtitle { font-size: 1.3rem; margin-bottom: 40px; opacity: 0.9; line-height: 1.6; }
+        h1 { font-size: 3rem; margin-bottom: 10px; font-weight: 300; }
+        .subtitle { font-size: 1.2rem; margin-bottom: 40px; opacity: 0.8; }
 
-        /* Links Grid - Adjusted for 1 big, 3 small */
+        /* Grid Layout: 1 Big, 3 Small */
         .links-grid {
             display: grid;
-            /* Create 3 equal columns */
-            grid-template-columns: repeat(3, 1fr); 
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
             width: 100%;
-            margin: 0 auto;
         }
 
         .link-box {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.12);
             backdrop-filter: blur(10px);
             padding: 40px 20px;
             border-radius: 20px;
@@ -55,56 +125,95 @@
             color: white;
             font-weight: bold;
             font-size: 1.2rem;
-            transition: all 0.4s ease;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
         }
 
-        /* Make the first box (Shuls) span all 3 columns */
+        /* The BIG Box */
         .link-box:first-child {
             grid-column: span 3;
-            padding: 60px 20px; /* Make it slightly taller since it's the "big" box */
-            font-size: 1.5rem;
+            padding: 60px 20px;
+            font-size: 1.6rem;
+            background: rgba(255, 255, 255, 0.18);
         }
 
         .link-box:hover {
             background: #2980b9;
             transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
         }
 
-        .back-link { margin-top: 40px; }
-        .back-link a { color: #3498db; text-decoration: none; font-size: 1.1rem; }
-        .back-link a:hover { text-decoration: underline; }
+        .back-link { margin-top: 30px; }
+        .back-link a { color: #3498db; text-decoration: none; opacity: 0.8; }
 
-        /* Mobile Fixes */
+        /* --- FOOTER STYLES --- */
+        footer {
+            width: 100%;
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            text-align: center;
+            margin-top: auto;
+        }
+        .footer-content { max-width: 1100px; margin: 0 auto; }
+        .footer-links { margin-bottom: 15px; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.9rem; }
+        .footer-links a:hover { color: white; }
+        .copyright { font-size: 0.8rem; opacity: 0.5; }
+
+        /* Mobile Adjustment */
         @media (max-width: 768px) {
-            .container { padding-top: 100px; }
             h1 { font-size: 2.2rem; }
-            /* On mobile, stack them or keep 1 big and small underneath */
-            .links-grid { grid-template-columns: 1fr; gap: 15px; }
+            .links-grid { grid-template-columns: 1fr; }
             .link-box:first-child { grid-column: span 1; }
-            .link-box { padding: 25px 10px; }
         }
     </style>
 </head>
 <body>
-    <div id="header"></div>
+
+    <header>
+        <div class="header-content">
+            <a href="/" class="logo">FindMTL.ca</a>
+            <div class="nav-wrapper">
+                <div class="hamburger" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="nav-menu" id="navMenu">
+                    <a href="/">Home</a>
+                    <a href="/shuls/outremont-mileend/shuls">All Shuls</a>
+                    <a href="/contact">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </header>
 
     <div class="container">
-        <h1>Outremont Shul Directory</h1>
-        <p class="subtitle">Find prayer times and locations in Outremont</p>
+        <h1>Outremont Directory</h1>
+        <p class="subtitle">Find local minyanim and community resources</p>
 
         <div class="links-grid">
-            <a href="/shuls/outremont-mileend/shuls" class="link-box">View All Shuls</a>
-            
-            <a href="/shuls/outremont-mileend/shacharis" class="link-box">Shacharis</a>
-            <a href="/shuls/outremont-mileend/mincha" class="link-box">Mincha</a>
-            <a href="/shuls/outremont-mileend/maariv" class="link-box">Maariv</a>
+            <a href="/shuls/outremont-mileend/shuls" class="link-box">
+                <i class="fa-solid fa-synagogue"></i>
+                View All Shuls
+            </a>
+            <a href="/shuls/outremont-mileend/shacharis" class="link-box">
+                <i class="fa-solid fa-sun"></i>
+                Shacharis
+            </a>
+            <a href="/shuls/outremont-mileend/mincha" class="link-box">
+                <i class="fa-solid fa-cloud-sun"></i>
+                Mincha
+            </a>
+            <a href="/shuls/outremont-mileend/maariv" class="link-box">
+                <i class="fa-solid fa-moon"></i>
+                Maariv
+            </a>
         </div>
 
         <div class="back-link">
@@ -112,17 +221,33 @@
         </div>
     </div>
 
-    <div id="footer"></div>
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/about">About</a>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
+                <a href="/contact">Contact</a>
+            </div>
+            <p class="copyright">&copy; 2024 FindMTL.ca - Montreal Jewish Directory</p>
+        </div>
+    </footer>
 
     <script>
-        // Header/Footer scripts remain the same as your original
-        fetch('/header.html')
-            .then(response => response.text())
-            .then(data => document.getElementById('header').innerHTML = data);
+        function toggleMenu() {
+            const hamburger = document.querySelector('.hamburger');
+            const menu = document.getElementById('navMenu');
+            hamburger.classList.toggle('active');
+            menu.classList.toggle('active');
+        }
 
-        fetch('/footer.html')
-            .then(response => response.text())
-            .then(data => document.getElementById('footer').innerHTML = data);
+        // Close menu when clicking outside
+        window.onclick = function(event) {
+            if (!event.target.closest('.nav-wrapper')) {
+                document.querySelector('.hamburger').classList.remove('active');
+                document.getElementById('navMenu').classList.remove('active');
+            }
+        }
     </script>
 </body>
 </html>
