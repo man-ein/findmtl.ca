@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outremont Resources • FindMTL.ca</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body, html {
+            margin: 0; padding: 0;
+            font-family: 'Helvetica', 'Arial', sans-serif;
+            color: #ffffff;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://media.istockphoto.com/id/478489838/photo/panoramic-picture-of-montreal-cityscape-at-sunset.jpg?s=612x612&w=0&k=20&c=78iWttuKv4r2Qz7U4QhLKnYg3Uy4zUumzNkHTq14DWo=') no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 1100px; width: 100%;
+            margin: 0 auto; padding: 140px 20px 60px; /* Adjusted padding for smaller feel */
+            flex-grow: 1;
+            box-sizing: border-box;
+        }
+
+        .header-section { text-align: center; margin-bottom: 30px; }
+        h1 { font-size: 2.4rem; margin-bottom: 8px; font-weight: 300; }
+        
+        /* --- SMALLER GRID & CARDS --- */
+        .listings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Smaller min-width */
+            gap: 15px; /* Tighter gap */
+            width: 100%;
+        }
+
+        .listing-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            padding: 15px; /* Reduced padding for smaller boxes */
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            min-height: 90px; /* Reduced min-height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .listing-card:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #3498db;
+        }
+
+        /* Column B Style (Top) */
+        .cell-value-B {
+            font-size: 1.1rem; /* Slightly smaller font */
+            font-weight: bold;
+            color: #3498db; 
+            margin-bottom: 4px;
+        }
+
+        /* Column A Style (Bottom) */
+        .cell-value-A {
+            font-size: 0.85rem; /* Smaller sub-text */
+            font-weight: normal;
+            color: #ffffff;
+            opacity: 0.85;
+            line-height: 1.3;
+        }
+
+        .loading-text { font-size: 0.75rem; opacity: 0.5; font-style: italic; }
+
+        @media (max-width: 768px) {
+            .container { padding-top: 110px; }
+            h1 { font-size: 1.8rem; }
+            .listings-grid { grid-template-columns: repeat(2, 1fr); } /* 2 per row on mobile */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="header"></div>
+
+    <div class="container">
+        <div class="header-section">
+            <h1>Outremont Resources</h1>
+            <p>Live community data from Google Sheets</p>
+        </div>
+
+        <div class="listings-grid" id="grid-container">
+            </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script>
+        // --- LOAD EXTERNAL HEADER/FOOTER ---
+        fetch('/header.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('header').innerHTML = data)
+            .catch(err => console.error("Header load error:", err));
+
+        fetch('/footer.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('footer').innerHTML = data)
+            .catch(err => console.error("Footer load error:", err));
+
+
+        const grid = document.getElementById('grid-container');
+        const bridgeURL = "https://script.google.com/macros/s/AKfycbwFt5Ha9SRY_yBaV229LPy_V6bI-p1cwBwEyKBoNWJ-iLCDoHxS1mzWr3I1F_-OftT4/exec";
+
+        // 1. Create placeholder boxes (Removed the "Ref" label line)
+        for (let i = 2; i <= 51; i++) {
+            const card = document.createElement('div');
+            card.className = 'listing-card';
+            card.id = `card-${i}`;
+            card.innerHTML = `
+                <div class="cell-value-B" id="cell-B${i}"><span class="loading-text">Loading...</span></div>
+                <div class="cell-value-A" id="cell-A${i}"></div>
+            `;
+            grid.appendChild(card);
+        }
+
+        // 2. Fetch data
+        fetch(bridgeURL)
+            .then(response => response.json())
+            .then(dataRows => {
+                dataRows.forEach((row, index) => {
+                    const rowNum = index + 2;
+                    const elementA = document.getElementById(`cell-A${rowNum}`);
+                    const elementB = document.getElementById(`cell-B${rowNum}`);
+                    const card = document.getElementById(`card-${rowNum}`);
+
+                    const valA = row[0]; // Column A
+                    const valB = row[1]; // Column B
+
+                    if (elementA && elementB) {
+                        elementA.innerText = valA || "";
+                        elementB.innerText = valB || "---";
+                        
+                        // Hide card if empty
+                        if ((!valA || valA.trim() === "") && (!valB || valB.trim() === "---" || valB.trim() === "")) {
+                            card.style.display = 'none';
+                        }
+                    }
+                });
+            })
+            .catch(err => {
+                console.error("Fetch error:", err);
+                document.querySelectorAll('.cell-value-B').forEach(el => {
+                    el.innerText = "Offline";
+                });
+            });
+    </script>
+</body>
+</html>
