@@ -20,7 +20,7 @@
             min-height: 100vh;
         }
 
-        /* --- HEADER STYLES (MATCHING YOUR OTHER PAGE) --- */
+        /* --- UPDATED HEADER STYLES (MATCHING YOUR SAMPLE) --- */
         header {
             position: fixed;
             top: 0;
@@ -51,7 +51,6 @@
         }
         .desktop-nav a:hover { color: #3498db; }
 
-        /* Mobile Hamburger Styles */
         .hamburger { cursor: pointer; padding: 5px; display: block; }
         .hamburger span { 
             display: block; width: 30px; height: 3px; background: white; 
@@ -74,12 +73,34 @@
         }
         .nav-menu a:hover { background: rgba(52, 152, 219, 0.4); }
 
-        /* --- CONTAINER & GRID --- */
+        /* --- UPDATED FOOTER STYLES (MATCHING YOUR SAMPLE) --- */
+        footer {
+            width: 100%;
+            padding: 40px 20px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(10px);
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            margin-top: auto;
+        }
+        .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+        .footer-links a { 
+            color: rgba(255, 255, 255, 0.8); 
+            text-decoration: none; font-size: 0.95rem; 
+            transition: color 0.3s; 
+        }
+        .footer-links a:hover { color: white; }
+        .copyright { font-size: 0.85rem; opacity: 0.7; text-align: center; }
+
+        /* --- YOUR ORIGINAL 5-COLUMN GRID (UNTOUCHED) --- */
         .container {
             max-width: 1100px;
             width: 100%;
             margin: 0 auto;
-            padding: 160px 20px 60px; /* Space for the fixed header */
+            padding: 160px 20px 60px;
             flex-grow: 1;
             box-sizing: border-box;
         }
@@ -132,29 +153,6 @@
 
         .loading-text { font-size: 0.75rem; opacity: 0.5; font-style: italic; }
 
-        /* --- FOOTER STYLES (MATCHING YOUR OTHER PAGE) --- */
-        footer {
-            width: 100%;
-            padding: 40px 20px;
-            background: rgba(0, 0, 0, 0.5);
-            backdrop-filter: blur(10px);
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 20px;
-            margin-top: auto;
-        }
-        .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-        .footer-links a { 
-            color: rgba(255, 255, 255, 0.8); 
-            text-decoration: none; font-size: 0.95rem; 
-            transition: color 0.3s; 
-        }
-        .footer-links a:hover { color: white; }
-        .copyright { font-size: 0.85rem; opacity: 0.7; text-align: center; }
-
-        /* --- MOBILE ADJUSTMENTS --- */
         @media (max-width: 768px) {
             .desktop-nav { display: none; }
             .container { padding-top: 140px; }
@@ -185,7 +183,6 @@
             .then(response => response.text())
             .then(data => {
                 document.getElementById('header').innerHTML = data;
-                // Initialize mobile menu toggle after header loads
                 setupMobileMenu();
             })
             .catch(err => console.error("Header load error:", err));
@@ -246,7 +243,6 @@
             }
         }
 
-        // Close menu logic when clicking outside
         window.onclick = function(event) {
             if (!event.target.closest('.nav-wrapper')) {
                 const hamburger = document.querySelector('.hamburger');
