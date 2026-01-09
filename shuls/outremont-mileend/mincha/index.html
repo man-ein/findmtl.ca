@@ -40,8 +40,6 @@
             align-items: center;
         }
         .logo { font-size: 1.8rem; font-weight: bold; color: white; text-decoration: none; }
-        
-        /* Navigation wrapper and mobile styles provided in your template */
         .nav-wrapper { display: flex; align-items: center; gap: 20px; position: relative; }
         .hamburger { cursor: pointer; padding: 5px; display: block; }
         .hamburger span { 
@@ -103,7 +101,6 @@
         .cell-value-A { font-size: 0.85rem; color: #ffffff; opacity: 0.85; }
         .loading-text { font-size: 0.75rem; opacity: 0.5; font-style: italic; }
 
-        /* Combined Footer Styles */
         footer {
             width: 100%;
             padding: 40px 20px;
@@ -136,7 +133,7 @@
     <div id="footer"></div>
 
     <script>
-        // 1. Fetch Header/Footer with improved error handling
+        // 1. Fetch Header/Footer with dynamic injection
         fetch('/header.html')
             .then(r => r.text())
             .then(d => {
@@ -152,7 +149,7 @@
             })
             .catch(err => console.error("Error loading footer:", err));
 
-        // 2. Fetch Data from Google Sheets Bridge
+        // 2. Fetch Data (Targeted to the Mincha parameter)
         const grid = document.getElementById('grid-container');
         const bridgeURL = "https://script.google.com/macros/s/AKfycbwFt5Ha9SRY_yBaV229LPy_V6bI-p1cwBwEyKBoNWJ-iLCDoHxS1mzWr3I1F_-OftT4/exec?page=Mincha";
 
@@ -177,13 +174,12 @@
                     const elementB = document.getElementById(`cell-B${rowNum}`);
                     const card = document.getElementById(`card-${rowNum}`);
                     
-                    const valA = row[0]; // Address/Name
-                    const valB = row[1]; // Time
+                    const valA = row[0]; 
+                    const valB = row[1]; 
 
                     if (elementA && elementB && card) {
                         elementA.innerText = valA || "";
                         elementB.innerText = valB || "";
-                        // Hide card if both cells are empty
                         if (!valA && !valB) {
                             card.style.display = 'none';
                         }
@@ -195,7 +191,7 @@
                 document.querySelectorAll('.cell-value-B').forEach(el => el.innerText = "Offline");
             });
 
-        // Mobile menu initialization logic
+        // Mobile menu toggle logic
         function setupMobileMenu() {
             const hamburger = document.querySelector('.hamburger');
             const menu = document.getElementById('navMenu');
@@ -207,7 +203,7 @@
             }
         }
 
-        // Global click handler to close menu when clicking outside
+        // Close menu logic when clicking outside
         window.addEventListener('click', (event) => {
             if (!event.target.closest('.nav-wrapper')) {
                 const hamburger = document.querySelector('.hamburger');
